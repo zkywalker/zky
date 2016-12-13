@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">zky</string>
+    <string name="email">zhan9kun@outlook.com</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="name">zhang kun</string>
+
+</resources>
