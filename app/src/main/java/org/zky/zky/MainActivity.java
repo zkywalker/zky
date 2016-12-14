@@ -1,7 +1,10 @@
 package org.zky.zky;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.zky.zky.utils.GetText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,8 +95,42 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_sdk) {
 
         } else if (id == R.id.nav_share) {
+            //            intent.setType("image/*");
+            /*
+             * 图片分享 it.setType("image/png"); 　//添加图片 File f = new
+             * File(Environment.getExternalStorageDirectory()+"/name.png");
+             *
+             * Uri uri = Uri.fromFile(f); intent.putExtra(Intent.EXTRA_STREAM,
+             * uri); 　
+             */
+            Intent intent=new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain"); //纯文本
+            intent.putExtra(Intent.EXTRA_SUBJECT, GetText.getString(R.string.share));
+            intent.putExtra(Intent.EXTRA_TEXT, GetText.getString(R.string.share_content));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(Intent.createChooser(intent,  GetText.getString(R.string.share)));
 
         } else if (id == R.id.nav_send) {
+
+            try {
+
+//                Intent.ACTION_SENDTO 无附件的发送
+//                Intent.ACTION_SEND 带附件的发送
+//                Intent.ACTION_SEND_MULTIPLE 带有多附件的发送
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"+GetText.getString(R.string.email)));
+                intent.putExtra(Intent.EXTRA_SUBJECT, GetText.getString(R.string.email_subject));
+                startActivity(intent);
+
+            }catch (ActivityNotFoundException e){
+
+                Snackbar.make(findViewById(R.id.content_main),GetText.getString(R.string.no_email_app),Snackbar.LENGTH_LONG).setAction(GetText.getString(R.string.i_know), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }).show();
+
+            }
 
         }
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">zky</string>
     <string name="email">zhan9kun@outlook.com</string>
+    <string name="share_content">https://github.com/zkywalker/zky.git</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -16,5 +17,10 @@
     <string name="share">分享</string>
     <string name="send">发邮件</string>
     <string name="communicate">交流</string>
+
+
+    <string name="email_subject">daily android learning app feedback</string>
+    <string name="no_email_app">没有发现可用的邮件app</string>
+    <string name="i_know">知道了</string>
 
 </resources>
