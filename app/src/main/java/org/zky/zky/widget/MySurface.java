@@ -18,6 +18,8 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback, Ru
     private boolean mIsDrawing;
     private Path mPath;
     private Paint mPaint;
+    //绘制间隔
+    private static int INTERVAL= 50;
 
     public MySurface(Context context) {
         super(context);
@@ -41,7 +43,7 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback, Ru
 
         setFocusable(true);
         setFocusableInTouchMode(true);
-        this.setKeepScreenOn(true);
+//        this.setKeepScreenOn(true);
 
         mPath = new Path();
         mPaint = new Paint();
@@ -70,19 +72,20 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback, Ru
 
     @Override
     public void run() {
-        long start = System.currentTimeMillis();
         while (mIsDrawing) {
+            long start = System.currentTimeMillis();
             draw();
-        }
-        long end = System.currentTimeMillis();
-        // 50 - 100
-        if (end - start < 100) {
-            try {
-                Thread.sleep(100 - (end - start));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            long end = System.currentTimeMillis();
+            // 50 - 100
+            if (end - start < INTERVAL) {
+                try {
+                    Thread.sleep(INTERVAL - (end - start));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
     private void draw() {
