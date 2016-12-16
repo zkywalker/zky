@@ -20,7 +20,7 @@ import android.view.SurfaceHolder;
 public class RockerView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     private static final String TAG = "RockerView";
     //绘制间隔
-    private static int INTERVAL= 100;
+    private static int INTERVAL= 50;
 
     private Point mStartPoint;
     private Point mEndPoint;
@@ -128,14 +128,15 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
             case MotionEvent.ACTION_MOVE:
                 mEndPoint.x = (int) event.getX();
                 mEndPoint.y = (int) event.getY();
-                Log.e(TAG, "draw: end("+mEndPoint.x+","+mEndPoint.y+")");
+
                 mCurrentPoint.x = mCenterPoint.x + (mEndPoint.x - mStartPoint.x);
                 mCurrentPoint.y = mCenterPoint.y + (mEndPoint.y - mStartPoint.y);
-                Log.e(TAG, "draw: ("+mCurrentPoint.x+","+mCurrentPoint.y+")");
+                Log.e(TAG, "draw: start("+mStartPoint.x+","+mStartPoint.y+") end("+mEndPoint.x+","+mEndPoint.y+")"+",current("+mCurrentPoint.x+","+mCurrentPoint.y+") , center("+mCenterPoint.x+","+mCenterPoint.y+")");
 
                 break;
             case MotionEvent.ACTION_UP:
-                mCurrentPoint =mCenterPoint;
+                mCurrentPoint.x = width/2;
+                mCurrentPoint.y = height / 2;
                 break;
         }
         return true;
@@ -147,7 +148,8 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         height=measureHeight(heightMeasureSpec);
         mCenterPoint.x = width/2;
         mCenterPoint.y = height / 2;
-        mCurrentPoint =mCenterPoint;
+        mCurrentPoint.x = width/2;
+        mCurrentPoint.y = height / 2;
         setMeasuredDimension(width,height);
     }
 
