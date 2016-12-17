@@ -19,5 +19,6 @@
         app:button="@mipmap/ic_launcher"
         app:buttonWidth="70dp"
         app:buttonHeight="70dp"
+        app:mBackground="#f0f"
         />
 </RelativeLayout>

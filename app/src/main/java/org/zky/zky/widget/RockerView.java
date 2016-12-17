@@ -8,6 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,6 +22,7 @@ import org.zky.zky.utils.ScreenUtils;
 
 /**
  * rocker
+ * //TODO 摇杆的回调，摇杆活动有效范围
  * Created by zhan9 on 2016/12/16.
  */
 
@@ -28,10 +31,10 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     //绘制间隔
     private static int DEFAULT_INTERVAL = 50;
     //默认宽高
-    private static  int DEFAULT_WIDTH = 200;
-    private static  int DEFAULT_HEIGHT = 200;
+    private static int DEFAULT_WIDTH = 200;
+    private static int DEFAULT_HEIGHT = 200;
     //默认按钮宽高
-    private static  int DEFAULT_BUTTON_WIDTH = 36;
+    private static int DEFAULT_BUTTON_WIDTH = 36;
 
 
     private Point mStartPoint;
@@ -48,6 +51,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private Paint mPaint;
     private int id_button;
     private int id_background;
+    private int color_background;
     private float buttonWidth;
     private float buttonHeight;
     private Bitmap bm_button;
@@ -62,7 +66,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
 
     public RockerView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public RockerView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -74,25 +78,24 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     }
 
     private void initAttrs(AttributeSet attrs) {
-        Log.e(TAG, "RockerView: initatrs");
 
-        TypedArray array =mContext.obtainStyledAttributes(attrs, R.styleable.RockerView);
+        TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.RockerView);
         id_button = array.getResourceId(R.styleable.RockerView_button, 0);
-        id_background = array.getResourceId(R.styleable.RockerView_mBackground,0);
-        buttonWidth = array.getDimension(R.styleable.RockerView_buttonWidth, ScreenUtils.dip2px(mContext,DEFAULT_BUTTON_WIDTH));
-        buttonHeight = array.getDimension(R.styleable.RockerView_buttonHeight, ScreenUtils.dip2px(mContext,DEFAULT_BUTTON_WIDTH));
+        id_background = array.getResourceId(R.styleable.RockerView_mBackground, 0);
+        color_background = array.getColor(R.styleable.RockerView_mBackground, Color.WHITE);
+        buttonWidth = array.getDimension(R.styleable.RockerView_buttonWidth, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH));
+        buttonHeight = array.getDimension(R.styleable.RockerView_buttonHeight, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH));
         array.recycle();
     }
 
 
     private void init() {
-        if (id_button!=0) {
-
+        if (id_button != 0) {
             bm_button = BitmapFactory.decodeResource(mContext.getResources(), id_button);
-            bm_button = ScreenUtils.zoomImg(bm_button,buttonWidth,buttonHeight);
-            Log.e(TAG, "init: decode bitmap" +bm_button);
+            if (bm_button != null)
+                bm_button = ScreenUtils.zoomImg(bm_button, buttonWidth, buttonHeight);
         }
-        if (id_background!=0){
+        if (id_background != 0) {
             bm_background = BitmapFactory.decodeResource(mContext.getResources(), id_background);
         }
 
@@ -118,10 +121,9 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     public void surfaceCreated(SurfaceHolder holder) {
         mIsDrawing = true;
         //绘制背景
-        drawBackground();
+//        drawBackground();
         new Thread(this).start();
     }
-
 
 
     @Override
@@ -136,14 +138,14 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
     @Override
     public void run() {
-        while (mIsDrawing){
+        while (mIsDrawing) {
             long start = System.currentTimeMillis();
             drawButton();
             long end = System.currentTimeMillis();
-            if (end-start< DEFAULT_INTERVAL){
+            if (end - start < DEFAULT_INTERVAL) {
                 try {
-                    Thread.sleep(DEFAULT_INTERVAL -(end-start));
-                }catch (Exception e){
+                    Thread.sleep(DEFAULT_INTERVAL - (end - start));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -153,28 +155,43 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private void drawButton() {
         try {
             mCanvas = mHolder.lockCanvas();
-            mCanvas.drawColor(Color.WHITE);
-            if (bm_button!=null){
-                mCanvas.drawBitmap(bm_button,mCurrentPoint.x-buttonWidth/2,mCurrentPoint.y-buttonHeight/2,mPaint);
+            //TODO 测量背景图案高宽
+            if (bm_background!=null){
+                bm_background = ScreenUtils.zoomImg(bm_background,width,height);
+                mCanvas.drawBitmap(bm_button,0,0,mPaint);
             }else {
-                mCanvas.drawCircle(mCurrentPoint.x,mCurrentPoint.y, ScreenUtils.dip2px(mContext,DEFAULT_BUTTON_WIDTH),mPaint);
+                mCanvas.drawColor(color_background);
             }
 
-        }catch (Exception e){
+
+            if (bm_button != null) {
+                mCanvas.drawBitmap(bm_button, mCurrentPoint.x - buttonWidth / 2, mCurrentPoint.y - buttonHeight / 2, mPaint);
+            } else {
+                mCanvas.drawCircle(mCurrentPoint.x, mCurrentPoint.y, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH), mPaint);
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if (mCanvas!=null)
+        } finally {
+            if (mCanvas != null)
                 mHolder.unlockCanvasAndPost(mCanvas);
         }
     }
 
     private void drawBackground() {
         try {
+            mCanvas = mHolder.lockCanvas();
+            if (bm_background!=null){
+                bm_background = ScreenUtils.zoomImg(bm_background,width,height);
+                mCanvas.drawBitmap(bm_button,0,0,mPaint);
+            }else {
+                mCanvas.drawColor(color_background);
+            }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if (mCanvas!=null)
+        } finally {
+            if (mCanvas != null)
                 mHolder.unlockCanvasAndPost(mCanvas);
         }
     }
@@ -193,11 +210,11 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
                 mCurrentPoint.x = mCenterPoint.x + (mEndPoint.x - mStartPoint.x);
                 mCurrentPoint.y = mCenterPoint.y + (mEndPoint.y - mStartPoint.y);
-                Log.i(TAG, "drawButton: start("+mStartPoint.x+","+mStartPoint.y+") end("+mEndPoint.x+","+mEndPoint.y+")"+",current("+mCurrentPoint.x+","+mCurrentPoint.y+") , center("+mCenterPoint.x+","+mCenterPoint.y+")");
+                Log.i(TAG, "drawButton: start(" + mStartPoint.x + "," + mStartPoint.y + ") end(" + mEndPoint.x + "," + mEndPoint.y + ")" + ",current(" + mCurrentPoint.x + "," + mCurrentPoint.y + ") , center(" + mCenterPoint.x + "," + mCenterPoint.y + ")");
 
                 break;
             case MotionEvent.ACTION_UP:
-                mCurrentPoint.x = width/2;
+                mCurrentPoint.x = width / 2;
                 mCurrentPoint.y = height / 2;
                 break;
         }
@@ -206,25 +223,25 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        width=measureWidth(widthMeasureSpec);
-        height=measureHeight(heightMeasureSpec);
-        mCenterPoint.x = width/2;
+        width = measureWidth(widthMeasureSpec);
+        height = measureHeight(heightMeasureSpec);
+        mCenterPoint.x = width / 2;
         mCenterPoint.y = height / 2;
-        mCurrentPoint.x = width/2;
+        mCurrentPoint.x = width / 2;
         mCurrentPoint.y = height / 2;
-        setMeasuredDimension(width,height);
+        setMeasuredDimension(width, height);
     }
 
     private int measureHeight(int heightMeasureSpec) {
         int result;
         int mode = MeasureSpec.getMode(heightMeasureSpec);
         int size = MeasureSpec.getSize(heightMeasureSpec);
-        if (mode==MeasureSpec.EXACTLY){
+        if (mode == MeasureSpec.EXACTLY) {
             result = size;
-        }else{
-            result =  ScreenUtils.dip2px(mContext,DEFAULT_HEIGHT);
-            if (mode ==MeasureSpec.AT_MOST){
-                result = Math.min(result,size);
+        } else {
+            result = ScreenUtils.dip2px(mContext, DEFAULT_HEIGHT);
+            if (mode == MeasureSpec.AT_MOST) {
+                result = Math.min(result, size);
             }
         }
         return result;
@@ -234,17 +251,16 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         int result;
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         int size = MeasureSpec.getSize(widthMeasureSpec);
-        if (mode==MeasureSpec.EXACTLY){
+        if (mode == MeasureSpec.EXACTLY) {
             result = size;
-        }else{
-            result =  ScreenUtils.dip2px(mContext,DEFAULT_WIDTH);
-            if (mode ==MeasureSpec.AT_MOST){
-                result = Math.min(result,size);
+        } else {
+            result = ScreenUtils.dip2px(mContext, DEFAULT_WIDTH);
+            if (mode == MeasureSpec.AT_MOST) {
+                result = Math.min(result, size);
             }
         }
         return result;
     }
-
 
 
 }
