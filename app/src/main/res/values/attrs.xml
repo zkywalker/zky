@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RockerView">
+        <attr name="button" format="reference"/>
+        <attr name="mBackground" format="reference|color"/>
+        <attr name="buttonWidth" format="dimension"/>
+        <attr name="buttonHeight" format="dimension"/>
+    </declare-styleable>
+
+</resources>
