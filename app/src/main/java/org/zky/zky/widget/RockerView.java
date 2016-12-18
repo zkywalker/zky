@@ -22,7 +22,7 @@ import org.zky.zky.utils.ScreenUtils;
 
 /**
  * rocker
- * //TODO 摇杆的回调，摇杆活动有效范围
+ * //TODO 摇杆的回调
  * Created by zhan9 on 2016/12/16.
  */
 
@@ -210,6 +210,14 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
                 mCurrentPoint.x = mCenterPoint.x + (mEndPoint.x - mStartPoint.x);
                 mCurrentPoint.y = mCenterPoint.y + (mEndPoint.y - mStartPoint.y);
+
+                //判断有效区域
+                mCurrentPoint.x = (int) Math.max(mCurrentPoint.x,buttonWidth/2);
+                mCurrentPoint.x = (int) Math.min(mCurrentPoint.x,width-buttonWidth/2);
+
+                mCurrentPoint.y = (int) Math.max(mCurrentPoint.y,buttonHeight/2);
+                mCurrentPoint.y = (int) Math.min(mCurrentPoint.y,height-buttonHeight/2);
+
                 Log.i(TAG, "drawButton: start(" + mStartPoint.x + "," + mStartPoint.y + ") end(" + mEndPoint.x + "," + mEndPoint.y + ")" + ",current(" + mCurrentPoint.x + "," + mCurrentPoint.y + ") , center(" + mCenterPoint.x + "," + mCenterPoint.y + ")");
 
                 break;
