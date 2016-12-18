@@ -18,6 +18,16 @@ public class ScreenUtils {
     }
 
     /**
+     * 另一种实现，目测这种更好
+     * @param context 1
+     * @param value 2
+     * @return 3
+     */
+    private int dp2px(Context context,int value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
+    }
+
+    /**
      * px2dp
      */
     public static int px2dip(Context context, float pxValue) {
@@ -43,13 +53,12 @@ public class ScreenUtils {
         int width = bm.getWidth();
         int height = bm.getHeight();
         // 计算缩放比例
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
+        float scaleWidth = newWidth / width;
+        float scaleHeight = newHeight / height;
         // 取得想要缩放的matrix参数
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         // 得到新的图片
-        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-        return newbm;
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
     }
 }
