@@ -8,7 +8,7 @@ intent发送邮件&分享内容
 
 ###2016.12.16
 
-surface view 实现摇杆功能
+surface view 实现摇杆功能(感觉类似摇杆的功能不适合用surface view)
 
 butter knife的使用
 

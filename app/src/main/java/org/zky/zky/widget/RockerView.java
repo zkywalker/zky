@@ -51,7 +51,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private Paint mPaint;
     private int id_button;
     private int id_background;
-    private int color_background;
+    private int color_background=Color.WHITE;
     private float buttonWidth;
     private float buttonHeight;
     private Bitmap bm_button;
@@ -82,7 +82,8 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.RockerView);
         id_button = array.getResourceId(R.styleable.RockerView_button, 0);
         id_background = array.getResourceId(R.styleable.RockerView_mBackground, 0);
-        color_background = array.getColor(R.styleable.RockerView_mBackground, Color.WHITE);
+        if (id_background == 0)
+            color_background = array.getColor(R.styleable.RockerView_mBackground, Color.WHITE);
         buttonWidth = array.getDimension(R.styleable.RockerView_buttonWidth, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH));
         buttonHeight = array.getDimension(R.styleable.RockerView_buttonHeight, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH));
         array.recycle();
@@ -120,8 +121,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         mIsDrawing = true;
-        //绘制背景
-//        drawBackground();
+
         new Thread(this).start();
     }
 
@@ -155,11 +155,11 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private void drawButton() {
         try {
             mCanvas = mHolder.lockCanvas();
-            //TODO 测量背景图案高宽
-            if (bm_background!=null){
-                bm_background = ScreenUtils.zoomImg(bm_background,width,height);
-                mCanvas.drawBitmap(bm_button,0,0,mPaint);
-            }else {
+            if (bm_background != null) {
+                if (bm_background.getWidth()!=width)
+                    bm_background = ScreenUtils.zoomImg(bm_background, width, height);
+                mCanvas.drawBitmap(bm_background, 0, 0, null);
+            } else {
                 mCanvas.drawColor(color_background);
             }
 
@@ -181,10 +181,10 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private void drawBackground() {
         try {
             mCanvas = mHolder.lockCanvas();
-            if (bm_background!=null){
-                bm_background = ScreenUtils.zoomImg(bm_background,width,height);
-                mCanvas.drawBitmap(bm_button,0,0,mPaint);
-            }else {
+            if (bm_background != null) {
+                bm_background = ScreenUtils.zoomImg(bm_background, width, height);
+                mCanvas.drawBitmap(bm_button, 0, 0, mPaint);
+            } else {
                 mCanvas.drawColor(color_background);
             }
 
@@ -239,7 +239,12 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         if (mode == MeasureSpec.EXACTLY) {
             result = size;
         } else {
-            result = ScreenUtils.dip2px(mContext, DEFAULT_HEIGHT);
+            if (bm_background != null) {
+                result = bm_background.getHeight();
+            } else {
+                result = ScreenUtils.dip2px(mContext, DEFAULT_HEIGHT);
+            }
+
             if (mode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, size);
             }
@@ -254,7 +259,12 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         if (mode == MeasureSpec.EXACTLY) {
             result = size;
         } else {
-            result = ScreenUtils.dip2px(mContext, DEFAULT_WIDTH);
+            if (bm_background != null) {
+                result = bm_background.getWidth();
+            } else {
+                result = ScreenUtils.dip2px(mContext, DEFAULT_HEIGHT);
+            }
+
             if (mode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, size);
             }
