@@ -35,6 +35,13 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private static int DEFAULT_HEIGHT = 200;
     //默认按钮宽高
     private static int DEFAULT_BUTTON_WIDTH = 36;
+    //状态
+    public static int STATUS_DEFAULT = 0;
+    public static int STATUS_UP = 1;
+    public static int STATUS_DOWN = 2;
+    public static int STATUS_LEFT = 3;
+    public static int STATUS_RIGHT = 4;
+
 
     private Point mStartPoint;
     private Point mEndPoint;
@@ -43,6 +50,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private int width;
     private int height;
 
+    private int mCurrentStatus = STATUS_DEFAULT;
     private boolean mIsDrawing;
     private Context mContext;
     private SurfaceHolder mHolder;
@@ -55,6 +63,8 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private float buttonHeight;
     private Bitmap bm_button;
     private Bitmap bm_background;
+
+    private RockerOnStatusChangeListener mListener;
 
 
     public RockerView(Context context) {
@@ -200,10 +210,51 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
                 Log.i(TAG, "drawButton: start(" + mStartPoint.x + "," + mStartPoint.y + ") end(" + mEndPoint.x + "," + mEndPoint.y + ")" + ",current(" + mCurrentPoint.x + "," + mCurrentPoint.y + ") , center(" + mCenterPoint.x + "," + mCenterPoint.y + ")");
 
+
+                if (mCurrentPoint.x*height/width - mCurrentPoint.y>0){
+                    if (mCurrentPoint.x*height/width +mCurrentPoint.y-height>0){
+                        //right
+                        Log.e(TAG, "onTouchEvent: status:right");
+                        if (mCurrentStatus!= STATUS_RIGHT&&mListener!=null){
+                            mCurrentStatus = STATUS_RIGHT;
+                            mListener.change(mCurrentStatus);
+                        }
+                    }else {
+                        //up
+                        Log.e(TAG, "onTouchEvent: status:up");
+                        if (mCurrentStatus!= STATUS_UP&&mListener!=null){
+                            mCurrentStatus = STATUS_UP;
+                            mListener.change(mCurrentStatus);
+                        }
+                    }
+                }else {
+                    if (mCurrentPoint.x*height/width +mCurrentPoint.y - height>0){
+                        //down
+                        Log.e(TAG, "onTouchEvent: status:down");
+                        if (mCurrentStatus!= STATUS_DOWN&&mListener!=null){
+                            mCurrentStatus = STATUS_DOWN;
+                            mListener.change(mCurrentStatus);
+                        }
+
+                    }else {
+                        //left
+                        Log.e(TAG, "onTouchEvent: status:left");
+                        if (mCurrentStatus!= STATUS_LEFT&&mListener!=null){
+                            mCurrentStatus = STATUS_LEFT;
+                            mListener.change(mCurrentStatus);
+                        }
+                    }
+                }
+
                 break;
             case MotionEvent.ACTION_UP:
                 mCurrentPoint.x = width / 2;
                 mCurrentPoint.y = height / 2;
+                if (mCurrentStatus!=STATUS_DEFAULT&&mListener!=null){
+                    mCurrentStatus = STATUS_DEFAULT;
+                    mListener.change(mCurrentStatus);
+                }
+
                 break;
         }
         return true;
@@ -260,5 +311,12 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         return result;
     }
 
+    public void setRockerListener(RockerOnStatusChangeListener listener){
+        this.mListener = listener;
+    }
+
+    public interface RockerOnStatusChangeListener{
+        void change(int newStatus);
+    }
 
 }

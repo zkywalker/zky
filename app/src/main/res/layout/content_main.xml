@@ -14,11 +14,18 @@
     tools:showIn="@layout/app_bar_main">
 
     <org.zky.zky.widget.RockerView
+        android:id="@+id/rv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:button="@mipmap/ic_launcher"
         app:buttonWidth="70dp"
         app:buttonHeight="70dp"
         app:mBackground="@drawable/python"
+        />
+    <TextView
+        android:layout_below="@+id/rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_status"
         />
 </RelativeLayout>

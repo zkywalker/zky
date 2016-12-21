@@ -14,11 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.zky.zky.utils.GetText;
+import org.zky.zky.widget.RockerView;
+
+import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.tv_status)
+    TextView tv_status;
+    @BindView(R.id.rv)
+    RockerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (rv==null)
+            rv = (RockerView) findViewById(R.id.rv);
+        rv.setRockerListener(new RockerView.RockerOnStatusChangeListener() {
+            @Override
+            public void change(int newStatus) {
+                String s = "";
+                switch (newStatus){
+                    case 0:
+                        s = "中";
+                        break;
+                    case 1:
+                        s = "上";
+                        break;
+                    case 2:
+                        s = "下";
+
+                        break;
+                    case 3:
+                        s = "左";
+                        break;
+                    case 4:
+                        s = "右";
+                        break;
+
+                }
+                if (tv_status==null)
+                    tv_status = (TextView) findViewById(R.id.tv_status);
+                tv_status.setText(s);
+            }
+        });
     }
 
     @Override
