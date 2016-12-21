@@ -36,7 +36,6 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     //默认按钮宽高
     private static int DEFAULT_BUTTON_WIDTH = 36;
 
-
     private Point mStartPoint;
     private Point mEndPoint;
     private Point mCenterPoint;
@@ -63,7 +62,6 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         mContext = context;
         init();
     }
-
 
     public RockerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -168,24 +166,6 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
                 mCanvas.drawBitmap(bm_button, mCurrentPoint.x - buttonWidth / 2, mCurrentPoint.y - buttonHeight / 2, mPaint);
             } else {
                 mCanvas.drawCircle(mCurrentPoint.x, mCurrentPoint.y, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH), mPaint);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (mCanvas != null)
-                mHolder.unlockCanvasAndPost(mCanvas);
-        }
-    }
-
-    private void drawBackground() {
-        try {
-            mCanvas = mHolder.lockCanvas();
-            if (bm_background != null) {
-                bm_background = ScreenUtils.zoomImg(bm_background, width, height);
-                mCanvas.drawBitmap(bm_button, 0, 0, mPaint);
-            } else {
-                mCanvas.drawColor(color_background);
             }
 
         } catch (Exception e) {
