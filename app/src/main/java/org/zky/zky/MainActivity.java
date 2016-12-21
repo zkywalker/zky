@@ -20,6 +20,7 @@ import org.zky.zky.utils.GetText;
 import org.zky.zky.widget.RockerView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,8 +47,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (rv==null)
-            rv = (RockerView) findViewById(R.id.rv);
+
         rv.setRockerListener(new RockerView.RockerOnStatusChangeListener() {
             @Override
             public void change(int newStatus) {
@@ -70,8 +71,6 @@ public class MainActivity extends AppCompatActivity
                         break;
 
                 }
-                if (tv_status==null)
-                    tv_status = (TextView) findViewById(R.id.tv_status);
                 tv_status.setText(s);
             }
         });
