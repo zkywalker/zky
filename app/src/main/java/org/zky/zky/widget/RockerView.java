@@ -29,7 +29,7 @@ import org.zky.zky.utils.ScreenUtils;
 public class RockerView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     private static final String TAG = "RockerView";
     //绘制间隔
-    private static int DEFAULT_INTERVAL = 50;
+    private static int DEFAULT_INTERVAL = 30;
     //默认宽高
     private static int DEFAULT_WIDTH = 200;
     private static int DEFAULT_HEIGHT = 200;
@@ -58,11 +58,13 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
     private Paint mPaint;
     private int id_button;
     private int id_background;
-    private int color_background=Color.WHITE;
+    private int color_background = Color.WHITE;
     private float buttonWidth;
     private float buttonHeight;
     private Bitmap bm_button;
     private Bitmap bm_background;
+
+    private boolean mIsRocking = false;
 
     private RockerOnStatusChangeListener mListener;
 
@@ -164,16 +166,21 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         try {
             mCanvas = mHolder.lockCanvas();
             if (bm_background != null) {
-                if (bm_background.getWidth()!=width)
+                if (bm_background.getWidth() != width)
                     bm_background = ScreenUtils.zoomImg(bm_background, width, height);
                 mCanvas.drawBitmap(bm_background, 0, 0, null);
             } else {
                 mCanvas.drawColor(color_background);
             }
 
-
             if (bm_button != null) {
-                mCanvas.drawBitmap(bm_button, mCurrentPoint.x - buttonWidth / 2, mCurrentPoint.y - buttonHeight / 2, mPaint);
+                //TODO 暂时解决闪回中心的问题，没有找到为什么- -
+                if (mIsRocking&&mCurrentPoint.x == width/2&& mCurrentPoint.y == height/2){
+                    Log.e(TAG, "drawButton: 又闪回了");
+                }else {
+                    mCanvas.drawBitmap(bm_button, mCurrentPoint.x - buttonWidth / 2, mCurrentPoint.y - buttonHeight / 2, mPaint);
+                }
+
             } else {
                 mCanvas.drawCircle(mCurrentPoint.x, mCurrentPoint.y, ScreenUtils.dip2px(mContext, DEFAULT_BUTTON_WIDTH), mPaint);
             }
@@ -195,6 +202,7 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
                 mStartPoint.y = (int) event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
+                mIsRocking = true ;
                 mEndPoint.x = (int) event.getX();
                 mEndPoint.y = (int) event.getY();
 
@@ -202,44 +210,43 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
                 mCurrentPoint.y = mCenterPoint.y + (mEndPoint.y - mStartPoint.y);
 
                 //判断有效区域
-                mCurrentPoint.x = (int) Math.max(mCurrentPoint.x,buttonWidth/2);
-                mCurrentPoint.x = (int) Math.min(mCurrentPoint.x,width-buttonWidth/2);
+                mCurrentPoint.x = (int) Math.max(mCurrentPoint.x, buttonWidth / 2);
+                mCurrentPoint.x = (int) Math.min(mCurrentPoint.x, width - buttonWidth / 2);
 
-                mCurrentPoint.y = (int) Math.max(mCurrentPoint.y,buttonHeight/2);
-                mCurrentPoint.y = (int) Math.min(mCurrentPoint.y,height-buttonHeight/2);
+                mCurrentPoint.y = (int) Math.max(mCurrentPoint.y, buttonHeight / 2);
+                mCurrentPoint.y = (int) Math.min(mCurrentPoint.y, height - buttonHeight / 2);
+
+                if (mCurrentPoint.x == width / 2)
+                    Log.e(TAG, "drawButton: point(" + mCurrentPoint.x + "," + mCurrentPoint.y + ")");
 
                 Log.i(TAG, "drawButton: start(" + mStartPoint.x + "," + mStartPoint.y + ") end(" + mEndPoint.x + "," + mEndPoint.y + ")" + ",current(" + mCurrentPoint.x + "," + mCurrentPoint.y + ") , center(" + mCenterPoint.x + "," + mCenterPoint.y + ")");
 
 
-                if (mCurrentPoint.x*height/width - mCurrentPoint.y>0){
-                    if (mCurrentPoint.x*height/width +mCurrentPoint.y-height>0){
+                if (mCurrentPoint.x * height / width - mCurrentPoint.y > 0) {
+                    if (mCurrentPoint.x * height / width + mCurrentPoint.y - height > 0) {
                         //right
-                        Log.e(TAG, "onTouchEvent: status:right");
-                        if (mCurrentStatus!= STATUS_RIGHT&&mListener!=null){
+                        if (mCurrentStatus != STATUS_RIGHT && mListener != null) {
                             mCurrentStatus = STATUS_RIGHT;
                             mListener.change(mCurrentStatus);
                         }
-                    }else {
+                    } else {
                         //up
-                        Log.e(TAG, "onTouchEvent: status:up");
-                        if (mCurrentStatus!= STATUS_UP&&mListener!=null){
+                        if (mCurrentStatus != STATUS_UP && mListener != null) {
                             mCurrentStatus = STATUS_UP;
                             mListener.change(mCurrentStatus);
                         }
                     }
-                }else {
-                    if (mCurrentPoint.x*height/width +mCurrentPoint.y - height>0){
+                } else {
+                    if (mCurrentPoint.x * height / width + mCurrentPoint.y - height > 0) {
                         //down
-                        Log.e(TAG, "onTouchEvent: status:down");
-                        if (mCurrentStatus!= STATUS_DOWN&&mListener!=null){
+                        if (mCurrentStatus != STATUS_DOWN && mListener != null) {
                             mCurrentStatus = STATUS_DOWN;
                             mListener.change(mCurrentStatus);
                         }
 
-                    }else {
+                    } else {
                         //left
-                        Log.e(TAG, "onTouchEvent: status:left");
-                        if (mCurrentStatus!= STATUS_LEFT&&mListener!=null){
+                        if (mCurrentStatus != STATUS_LEFT && mListener != null) {
                             mCurrentStatus = STATUS_LEFT;
                             mListener.change(mCurrentStatus);
                         }
@@ -248,9 +255,11 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
 
                 break;
             case MotionEvent.ACTION_UP:
+                mIsRocking = false;
                 mCurrentPoint.x = width / 2;
                 mCurrentPoint.y = height / 2;
-                if (mCurrentStatus!=STATUS_DEFAULT&&mListener!=null){
+
+                if (mCurrentStatus != STATUS_DEFAULT && mListener != null) {
                     mCurrentStatus = STATUS_DEFAULT;
                     mListener.change(mCurrentStatus);
                 }
@@ -311,11 +320,11 @@ public class RockerView extends SurfaceView implements SurfaceHolder.Callback, R
         return result;
     }
 
-    public void setRockerListener(RockerOnStatusChangeListener listener){
+    public void setRockerListener(RockerOnStatusChangeListener listener) {
         this.mListener = listener;
     }
 
-    public interface RockerOnStatusChangeListener{
+    public interface RockerOnStatusChangeListener {
         void change(int newStatus);
     }
 

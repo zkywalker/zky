@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
                 String s = "";
                 switch (newStatus){
                     case 0:
-                        s = "中";
+                        s = "-------------------";
                         break;
                     case 1:
                         s = "上";
