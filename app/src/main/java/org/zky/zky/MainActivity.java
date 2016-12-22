@@ -24,10 +24,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    @BindView(R.id.tv_status)
-    TextView tv_status;
-    @BindView(R.id.rv)
-    RockerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,32 +44,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        rv.setRockerListener(new RockerView.RockerOnStatusChangeListener() {
-            @Override
-            public void change(int newStatus) {
-                String s = "";
-                switch (newStatus){
-                    case 0:
-                        s = "-------------------";
-                        break;
-                    case 1:
-                        s = "上";
-                        break;
-                    case 2:
-                        s = "下";
-
-                        break;
-                    case 3:
-                        s = "左";
-                        break;
-                    case 4:
-                        s = "右";
-                        break;
-
-                }
-                tv_status.setText(s);
-            }
-        });
     }
 
     @Override
@@ -115,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_widget) {
-            // Handle the camera action
+            startActivity(new Intent(this,SurfaceViewActivity.class));
         } else if (id == R.id.nav_view) {
 
         } else if (id == R.id.nav_activity) {
