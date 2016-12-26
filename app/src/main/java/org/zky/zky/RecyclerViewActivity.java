@@ -3,16 +3,16 @@ package org.zky.zky;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 import org.zky.zky.recyclerview.MyAdapter;
+import org.zky.zky.recyclerview.OverlayLayoutManager;
 import org.zky.zky.recyclerview.TestBean;
 import org.zky.zky.recyclerview.ViewHolder;
 import org.zky.zky.recyclerview.swipecard.CardConfig;
-import org.zky.zky.recyclerview.swipecard.OverLayCardLayoutManager;
+import org.zky.zky.recyclerview.swipecard.RenRenCallback;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewActivity extends AppCompatActivity {
     private ArrayList<TestBean> list;
+    private RecyclerView.Adapter adapter;
 
     @BindView(R.id.rv)
     RecyclerView rv;
@@ -50,7 +51,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        rv.setAdapter(new MyAdapter<TestBean>(this,list,R.layout.item_recycler_view){
+        rv.setAdapter(adapter = new MyAdapter<TestBean>(this,list,R.layout.item_recycler_view){
 
             @Override
             public void convert(ViewHolder var1, TestBean var2) {
@@ -59,7 +60,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         });
         CardConfig.initConfig(this);
         rv.setLayoutManager(new OverlayLayoutManager(this));
-
+        ItemTouchHelper helper = new ItemTouchHelper(new RenRenCallback(rv,adapter,list));
+        helper.attachToRecyclerView(rv);
     }
 
 }
