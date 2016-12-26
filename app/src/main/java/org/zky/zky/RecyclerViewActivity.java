@@ -13,6 +13,7 @@ import org.zky.zky.recyclerview.TestBean;
 import org.zky.zky.recyclerview.ViewHolder;
 import org.zky.zky.recyclerview.swipecard.CardConfig;
 import org.zky.zky.recyclerview.swipecard.RenRenCallback;
+import org.zky.zky.utils.GetText;
 
 import java.util.ArrayList;
 
@@ -40,14 +41,14 @@ public class RecyclerViewActivity extends AppCompatActivity {
     int i =0;
     private void initData() {
         list = new ArrayList<>();
-        list.add(new TestBean((i++) + "   ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "   ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
-        list.add(new TestBean((i++) + "  ", "吃玻璃不吐玻璃皮"));
+        list.add(new TestBean((i++) + "   ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "   ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
     }
 
     private void initView() {

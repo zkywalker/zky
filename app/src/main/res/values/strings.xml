@@ -22,5 +22,6 @@
     <string name="email_subject">daily android learning app feedback</string>
     <string name="no_email_app">没有发现可用的邮件app</string>
     <string name="i_know">知道了</string>
+    <string name="str_test">吃玻璃不吐玻璃皮</string>
 
 </resources>

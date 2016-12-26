@@ -8,6 +8,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.zky.zky.R;
+
 
 /**
  *一层层覆盖的recycler view
@@ -15,7 +17,7 @@ import android.view.ViewGroup;
  */
 
 public class OverlayLayoutManager extends RecyclerView.LayoutManager {
-    public static int MAX_SHOW_COUNT = 4;
+    public static int MAX_SHOW_COUNT = 3;
     public static float SCALE = 0.05f;
     public static int TRANSLATION_Y = 15;    //单位dp
 
@@ -59,31 +61,25 @@ public class OverlayLayoutManager extends RecyclerView.LayoutManager {
             bottomPosition = itemCount - mMaxShowCount;
         }
 
-        //从可见的最底层View开始layout，依次层叠上去
-        for (int position = bottomPosition; position < itemCount; position++) {
-            View view = recycler.getViewForPosition(position);
+        for (int i = mMaxShowCount; i >-1; i--) {
+            View view = recycler.getViewForPosition(i);
+//            if (i==3)
+//                view.findViewById(R.id.tv_test).setBackgroundColor(Color.RED);
             addView(view);
-            measureChildWithMargins(view, 0, 0);
-            int widthSpace = getWidth() - getDecoratedMeasuredWidth(view);
-            int heightSpace = getHeight() - getDecoratedMeasuredHeight(view);
-            //我们在布局时，将childView居中处理，这里也可以改为只水平居中
-            layoutDecorated(view, widthSpace / 2, heightSpace / 2,
-                    widthSpace / 2 + getDecoratedMeasuredWidth(view),
-                    heightSpace / 2 + getDecoratedMeasuredHeight(view));
-
-            //第几层,举例子，count =7， 最后一个TopView（6）是第0层，
-            int level = itemCount - position - 1;
-            //除了顶层不需要缩小和位移
-            if (level > 0 /*&& level < mShowCount - 1*/) {
-                //每一层都需要X方向的缩小
-                view.setScaleX(1 - mScale* level);
-                //前N层，依次向下位移和Y方向的缩小
-                if (level < mMaxShowCount - 1) {
-                    view.setTranslationY(mTranslationY * level);
-                    view.setScaleY(1 - mScale * level);
+            measureChildWithMargins(view,0,0);
+            int marginWidth = getWidth() - getDecoratedMeasuredWidth(view);
+            int marginHeight = getHeight() - getDecoratedMeasuredHeight(view);
+            //设置view到布局中间
+            layoutDecorated(view,marginWidth/2,marginHeight/2,marginWidth/2+getDecoratedMeasuredWidth(view),marginHeight/2+getDecoratedMeasuredHeight(view));
+            //第一层不需要偏移
+            if (i>0){
+                view.setScaleX(1-mScale*i);
+                if (i < mMaxShowCount ) {
+                    view.setTranslationY(mTranslationY * i);
+                    view.setScaleY(1 - mScale * i);
                 } else {//第N层在 向下位移和Y方向的缩小的成都与 N-1层保持一致
-                    view.setTranslationY(mTranslationY * (level - 1));
-                    view.setScaleY(1 - mScale * (level - 1));
+                    view.setTranslationY(mTranslationY * (i - 1));
+                    view.setScaleY(1 - mScale * (i - 1));
                 }
             }
         }

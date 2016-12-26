@@ -1,9 +1,13 @@
 package org.zky.zky.recyclerview.swipecard;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
+
+import org.zky.zky.R;
 
 import java.util.List;
 
@@ -21,6 +25,7 @@ import static org.zky.zky.recyclerview.swipecard.CardConfig.TRANS_Y_GAP;
  */
 
 public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
+    private static final String TAG = "RenRenCallback";
 
     protected RecyclerView mRv;
     protected List mDatas;
@@ -55,8 +60,9 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
         //Log.e("swipecard", "onSwiped() called with: viewHolder = [" + viewHolder + "], direction = [" + direction + "]");
         //rollBack(viewHolder);
         //★实现循环的要点
+        Log.e(TAG, "onSwiped: "+viewHolder.getLayoutPosition());
         Object remove = mDatas.remove(viewHolder.getLayoutPosition());
-        mDatas.add(0, remove);
+        mDatas.add( remove);
         mAdapter.notifyDataSetChanged();
 
 
@@ -77,18 +83,24 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
         int childCount = recyclerView.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = recyclerView.getChildAt(i);
+
             //第几层,举例子，count =7， 最后一个TopView（6）是第0层，
-            int level = childCount - i - 1;
+            Log.e(TAG, "onChildDraw: childCount"+childCount+",i:"+i);
+            int level = childCount-i-1;
+//            if (level==2){
+//                child.findViewById(R.id.tv_test).setBackgroundColor(Color.GREEN);
+//            }
             if (level > 0) {
                 child.setScaleX((float) (1 - SCALE_GAP * level + fraction * SCALE_GAP));
 
-                if (level < MAX_SHOW_COUNT - 1) {
+                if (level < MAX_SHOW_COUNT ) {
                     child.setScaleY((float) (1 - SCALE_GAP * level + fraction * SCALE_GAP));
                     child.setTranslationY((float) (TRANS_Y_GAP * level - fraction * TRANS_Y_GAP));
                 } else {
-                    //child.setTranslationY((float) (mTranslationYGap * (level - 1) - fraction * mTranslationYGap));
+//                    child.setTranslationY((float) (TRANS_Y_GAP * level - fraction * TRANS_Y_GAP));
                 }
             }
+
         }
     }
 }
