@@ -13,13 +13,15 @@ import org.zky.zky.R;
 
 /**
  *一层层覆盖的recycler view
+ *
  * Created by zhangkun on 2016/12/26.
  */
 
 public class OverlayLayoutManager extends RecyclerView.LayoutManager {
     public static int MAX_SHOW_COUNT = 3;
     public static float SCALE = 0.05f;
-    public static int TRANSLATION_Y = 15;    //单位dp
+    public static int TRANSLATION_Y = 25;    //单位dp
+
 
 
     //view偏移距离
@@ -53,19 +55,14 @@ public class OverlayLayoutManager extends RecyclerView.LayoutManager {
             return;
         }
 
-        int bottomPosition;
-        //边界处理
-        if (itemCount < mMaxShowCount) {
-            bottomPosition = 0;
-        } else {
-            bottomPosition = itemCount - mMaxShowCount;
-        }
+        //TODO 这个地方要做个判定，如果少于最大展示数？
 
         for (int i = mMaxShowCount; i >-1; i--) {
             View view = recycler.getViewForPosition(i);
 //            if (i==3)
 //                view.findViewById(R.id.tv_test).setBackgroundColor(Color.RED);
             addView(view);
+            //测量子视图
             measureChildWithMargins(view,0,0);
             int marginWidth = getWidth() - getDecoratedMeasuredWidth(view);
             int marginHeight = getHeight() - getDecoratedMeasuredHeight(view);
@@ -77,7 +74,7 @@ public class OverlayLayoutManager extends RecyclerView.LayoutManager {
                 if (i < mMaxShowCount ) {
                     view.setTranslationY(mTranslationY * i);
                     view.setScaleY(1 - mScale * i);
-                } else {//第N层在 向下位移和Y方向的缩小的成都与 N-1层保持一致
+                } else {
                     view.setTranslationY(mTranslationY * (i - 1));
                     view.setScaleY(1 - mScale * (i - 1));
                 }
@@ -89,4 +86,28 @@ public class OverlayLayoutManager extends RecyclerView.LayoutManager {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
     }
 
+
+    public int getTranslationY() {
+        return mTranslationY;
+    }
+
+    public void setTranslationY(int mTranslationY) {
+        this.mTranslationY = mTranslationY;
+    }
+
+    public float getScale() {
+        return mScale;
+    }
+
+    public void setScale(float mScale) {
+        this.mScale = mScale;
+    }
+
+    public int getMaxShowCount() {
+        return mMaxShowCount;
+    }
+
+    public void setMaxShowCount(int mMaxShowCount) {
+        this.mMaxShowCount = mMaxShowCount;
+    }
 }

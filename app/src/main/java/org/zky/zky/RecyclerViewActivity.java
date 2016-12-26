@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import org.zky.zky.recyclerview.MyAdapter;
+import org.zky.zky.recyclerview.MyCallback;
 import org.zky.zky.recyclerview.OverlayLayoutManager;
 import org.zky.zky.recyclerview.TestBean;
 import org.zky.zky.recyclerview.ViewHolder;
-import org.zky.zky.recyclerview.swipecard.CardConfig;
-import org.zky.zky.recyclerview.swipecard.RenRenCallback;
+
 import org.zky.zky.utils.GetText;
 
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class RecyclerViewActivity extends AppCompatActivity {
     private ArrayList<TestBean> list;
     private RecyclerView.Adapter adapter;
+    private OverlayLayoutManager manager;
 
     @BindView(R.id.rv)
     RecyclerView rv;
@@ -59,9 +60,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 var1.setText(R.id.tv_test,var2.getName()+var2.getUrl());
             }
         });
-        CardConfig.initConfig(this);
-        rv.setLayoutManager(new OverlayLayoutManager(this));
-        ItemTouchHelper helper = new ItemTouchHelper(new RenRenCallback(rv,adapter,list));
+        rv.setLayoutManager(manager = new OverlayLayoutManager(this));
+        ItemTouchHelper helper = new ItemTouchHelper(new MyCallback(rv,adapter,list,manager.getTranslationY(),manager.getScale(),manager.getMaxShowCount()));
         helper.attachToRecyclerView(rv);
     }
 
