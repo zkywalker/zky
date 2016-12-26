@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import org.zky.zky.recyclerview.MyAdapter;
 import org.zky.zky.recyclerview.TestBean;
 import org.zky.zky.recyclerview.ViewHolder;
+import org.zky.zky.recyclerview.swipecard.CardConfig;
 import org.zky.zky.recyclerview.swipecard.OverLayCardLayoutManager;
 
 import java.util.ArrayList;
@@ -56,7 +57,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 var1.setText(R.id.tv_test,var2.getName()+var2.getUrl());
             }
         });
-        rv.setLayoutManager(new GridLayoutManager(this,2));
+        CardConfig.initConfig(this);
+        rv.setLayoutManager(new OverlayLayoutManager(this));
 
     }
 

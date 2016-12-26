@@ -29,6 +29,7 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
         detachAndScrapAttachedViews(recycler);
         int itemCount = getItemCount();
         if (itemCount < 1) {
+            Log.e(TAG, "onLayoutChildren: 没有item");
             return;
         }
         //top-3View的position
@@ -48,9 +49,9 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
             int widthSpace = getWidth() - getDecoratedMeasuredWidth(view);
             int heightSpace = getHeight() - getDecoratedMeasuredHeight(view);
             //我们在布局时，将childView居中处理，这里也可以改为只水平居中
-//            layoutDecorated(view, widthSpace / 2, heightSpace / 2,
-//                    widthSpace / 2 + getDecoratedMeasuredWidth(view),
-//                    heightSpace / 2 + getDecoratedMeasuredHeight(view));
+            layoutDecorated(view, widthSpace / 2, heightSpace / 2,
+                    widthSpace / 2 + getDecoratedMeasuredWidth(view),
+                    heightSpace / 2 + getDecoratedMeasuredHeight(view));
             /**
              * TopView的Scale 为1，translationY 0
              * 每一级Scale相差0.05f，translationY相差7dp左右
@@ -74,6 +75,7 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
                 } else {//第N层在 向下位移和Y方向的缩小的成都与 N-1层保持一致
                     view.setTranslationY(CardConfig.TRANS_Y_GAP * (level - 1));
                     view.setScaleY(1 - CardConfig.SCALE_GAP * (level - 1));
+                    Log.e(TAG, "onLayoutChildren: --------");
                 }
             }
         }
