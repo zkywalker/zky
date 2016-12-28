@@ -1,13 +1,9 @@
 package org.zky.zky.recyclerview;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
-
-import org.zky.zky.R;
 
 import java.util.List;
 
