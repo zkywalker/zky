@@ -10,4 +10,19 @@
     <color name="text">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+
+    <!-- CARD COLORS -->
+
+    <color name="one">#689F38</color>
+
+    <color name="two">#FFA000</color>
+
+    <color name="three">#EC407A</color>
+
+    <color name="four">#03A9F4</color>
+
+    <color name="five">#FF5722</color>
+
+    <color name="six">#00ACC1</color>
+
 </resources>
