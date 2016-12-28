@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layout_behavior="com.lzp.floatingactionbuttonplus.FabBehavior"
-    app:switchFabColor="#DB4537"
+    app:switchFabColor="@color/one"
     app:switchFabIcon="@drawable/ic_build_black_24dp">
 
     <com.lzp.floatingactionbuttonplus.FabTagLayout
