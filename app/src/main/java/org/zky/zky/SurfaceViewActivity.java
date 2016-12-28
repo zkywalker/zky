@@ -38,20 +38,20 @@ public class SurfaceViewActivity extends AppCompatActivity {
                 String s = "";
                 switch (newStatus) {
                     case 0:
-                        s = "中";
+                        s = GetText.getString(R.string.str_center);
                         break;
                     case 1:
-                        s = "上";
+                        s = GetText.getString(R.string.str_up);
                         break;
                     case 2:
-                        s = "下";
+                        s = GetText.getString(R.string.str_down);
 
                         break;
                     case 3:
-                        s = "左";
+                        s = GetText.getString(R.string.str_left);
                         break;
                     case 4:
-                        s = "右";
+                        s = GetText.getString(R.string.str_right);
                         break;
 
                 }

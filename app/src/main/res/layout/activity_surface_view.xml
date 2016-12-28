@@ -49,6 +49,7 @@
                 android:id="@+id/tv_status"
                 android:textSize="18sp"
                 android:textColor="@color/text"
+                android:text="@string/str_center"
                 />
         </android.support.v7.widget.CardView>
 

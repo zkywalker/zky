@@ -1,4 +1,5 @@
 <resources>
+    <string name="name">zhang kun</string>
     <string name="app_name">Android Learning Template</string>
     <string name="email">zhan9kun@outlook.com</string>
     <string name="share_content">https://github.com/zkywalker/zky.git</string>
@@ -6,9 +7,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">设置</string>
-    <string name="name">zhang kun</string>
 
     <string name="widget">控件</string>
     <string name="view">绘制</string>
@@ -25,5 +24,10 @@
     <string name="str_test">吃玻璃不吐玻璃皮</string>
     <string name="recycler_view_card">叠堆卡片</string>
     <string name="rocker_view">摇杆</string>
+    <string name="str_center">中</string>
+    <string name="str_up">上</string>
+    <string name="str_down">下</string>
+    <string name="str_left">左</string>
+    <string name="str_right">右</string>
 
 </resources>
