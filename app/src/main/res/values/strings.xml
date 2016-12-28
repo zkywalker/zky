@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">zky</string>
+    <string name="app_name">android learning template</string>
     <string name="email">zhan9kun@outlook.com</string>
     <string name="share_content">https://github.com/zkywalker/zky.git</string>
 
@@ -23,5 +23,7 @@
     <string name="no_email_app">没有发现可用的邮件app</string>
     <string name="i_know">知道了</string>
     <string name="str_test">吃玻璃不吐玻璃皮</string>
+    <string name="recycler_view_card">叠堆卡片</string>
+    <string name="rocker_view">摇杆</string>
 
 </resources>
