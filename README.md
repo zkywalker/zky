@@ -20,3 +20,6 @@ screen utils：px、dp之间的转换，bitmap缩小
 
 ###2016.12.27
 recycler view、LayoutManager、itemTouchHelper实现卡片叠堆，滑动删除顶部卡片
+
+###2016.12.28
+增加card view和一些material design color ，app更符合material design
