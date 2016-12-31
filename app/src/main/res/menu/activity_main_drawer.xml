@@ -32,5 +32,15 @@
                 android:title="@string/send" />
         </menu>
     </item>
+    <item android:title="@string/other" >
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="@string/action_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                />
+        </menu>
+
+    </item>
 
 </menu>
