@@ -1,4 +1,4 @@
-#android learning demo
+#Android Learning Template
 
 ###2016.12.15
 resources获取字符串，不在代码里硬编码，方便i18n
@@ -26,3 +26,6 @@ recycler view、LayoutManager、itemTouchHelper实现卡片叠堆，滑动删除
 
 ###2016.12.31
 preference fragment 实现 settings activity
+
+###2016.1.1
+使用base activity 实现切换app的主题
