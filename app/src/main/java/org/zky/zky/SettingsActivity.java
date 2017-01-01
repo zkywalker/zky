@@ -40,6 +40,7 @@ public class SettingsActivity extends BaseThemeActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             ListPreference preference = (ListPreference) findPreference(GetText.getString(R.string.key_theme));
+            setListPreferenceSummary(preference);
             preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -50,8 +51,46 @@ public class SettingsActivity extends BaseThemeActivity {
                 }
             });
         }
+        public void setListPreferenceSummary(ListPreference preference){
+            switch (PreferenceUtils.getTheme(getActivity())){
+                case THEME_DEFAULT:
+                    preference.setSummary(GetText.getString(R.string.color_default));
+                    break;
+                case THEME_BLUE:
+                    preference.setSummary(GetText.getString(R.string.color_blue));
+                    break;
+                case THEME_RED:
+                    preference.setSummary(GetText.getString(R.string.color_red));
 
+                    break;
+                case THEME_GREEN:
+                    preference.setSummary(GetText.getString(R.string.color_green));
+
+                    break;
+                case THEME_CYAN:
+                    preference.setSummary(GetText.getString(R.string.color_cyan));
+
+                    break;
+                case THEME_PURPLE:
+                    preference.setSummary(GetText.getString(R.string.color_purple));
+
+                    break;
+                case THEME_ORANGE:
+                    preference.setSummary(GetText.getString(R.string.color_orange));
+
+                    break;
+                case THEME_PINK:
+                    preference.setSummary(GetText.getString(R.string.color_pink));
+
+                    break;
+                case THEME_TEAL:
+                    preference.setSummary(GetText.getString(R.string.color_teal));
+                    break;
+            }
+        }
     }
+
+
 
     public void recreateActivity() {
         final Intent intent = IntentCompat.makeMainActivity(new ComponentName(this, MainActivity.class));
