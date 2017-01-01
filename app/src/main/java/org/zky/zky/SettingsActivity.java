@@ -1,33 +1,37 @@
 package org.zky.zky;
 
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Window;
 
 import org.zky.zky.utils.GetText;
 import org.zky.zky.utils.PreferenceUtils;
 
-public class SettingsActivity extends AppCompatActivity {
-    private static final String TAG = "SettingsActivity";
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private static MyPreferenceFragment fragment;
+public class SettingsActivity extends BaseThemeActivity {
+    private static final String TAG = "SettingsActivity";
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        ButterKnife.bind(this);
+        toolbar.setTitle(GetText.getString(R.string.action_settings));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
@@ -40,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     Log.e(TAG, "onPreferenceChange: newvalue:" + newValue.toString());
-                        PreferenceUtils.setTheme(getActivity(), (String) newValue);
+                    PreferenceUtils.setTheme(getActivity(), (String) newValue);
                     ((SettingsActivity) getActivity()).recreateActivity();
                     return false;
                 }

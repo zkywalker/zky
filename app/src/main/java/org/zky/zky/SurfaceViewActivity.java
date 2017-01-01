@@ -12,7 +12,7 @@ import org.zky.zky.widget.RockerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SurfaceViewActivity extends AppCompatActivity {
+public class SurfaceViewActivity extends BaseThemeActivity {
 
     @BindView(R.id.rv)
     RockerView rv;
@@ -23,7 +23,7 @@ public class SurfaceViewActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_surface_view);
         ButterKnife.bind(this);
