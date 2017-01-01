@@ -59,22 +59,35 @@
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
+    <string name="pref_title_theme">主题颜色</string>
+
+    public final static String THEME_CYAN = "3";
+    public final static String THEME_PURPLE = "4";
+    public final static String THEME_ORANGE = "5";
+    public final static String THEME_PINK = "6";
+    public final static String THEME_TEAL = "7";
+    <string-array name="pref_theme_titles">
+        <item>默认</item>
+        <item>蓝色</item>
+        <item>红色</item>
+        <item>绿色</item>
+        <item>蓝绿色</item>
+        <item>紫色</item>
+        <item>橙色</item>
+        <item>粉红色</item>
+        <item>青色</item>
     </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
+    <string-array name="pref_theme_values">
         <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+
     </string-array>
 
     <string-array name="list_preference_entries">
@@ -102,5 +115,6 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="key_theme">key_theme</string>
 
 </resources>

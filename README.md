@@ -23,3 +23,6 @@ recycler view、LayoutManager、itemTouchHelper实现卡片叠堆，滑动删除
 
 ###2016.12.28
 增加card view和一些material design color ，app更符合material design
+
+###2016.12.31
+preference fragment 实现 settings activity
