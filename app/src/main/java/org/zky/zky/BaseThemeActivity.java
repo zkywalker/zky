@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -88,5 +89,14 @@ public class BaseThemeActivity extends AppCompatActivity {
         TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorPrimaryDark, value, true);
         return value.data;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            super.onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

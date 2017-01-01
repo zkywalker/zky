@@ -31,13 +31,6 @@ public class WidgetActivity extends BaseThemeActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId==android.R.id.home)
-            super.onBackPressed();
-        return super.onOptionsItemSelected(item);
-    }
 
     public void rocker(View view) {
         startActivity(new Intent(this,SurfaceViewActivity.class));
