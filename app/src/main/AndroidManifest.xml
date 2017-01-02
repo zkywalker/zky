@@ -24,10 +24,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
-            android:name=".SurfaceViewActivity"
+            android:name=".widget.surfaceview.SurfaceViewActivity"
              />
         <activity
-            android:name=".RecyclerViewActivity"
+            android:name=".widget.recyclerview.RecyclerViewActivity"
             >
 
             <!-- <intent-filter> -->
@@ -38,7 +38,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".WidgetActivity"
+            android:name=".widget.WidgetActivity"
              />
         <activity
             android:name=".SettingsActivity"

@@ -1,15 +1,17 @@
-package org.zky.zky;
+package org.zky.zky.widget.recyclerview;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import org.zky.zky.recyclerview.MyAdapter;
-import org.zky.zky.recyclerview.MyCallback;
-import org.zky.zky.recyclerview.OverlayLayoutManager;
-import org.zky.zky.recyclerview.TestBean;
-import org.zky.zky.recyclerview.ViewHolder;
+import org.zky.zky.BaseThemeActivity;
+import org.zky.zky.R;
+import org.zky.zky.widget.recyclerview.MyAdapter;
+import org.zky.zky.widget.recyclerview.MyCallback;
+import org.zky.zky.widget.recyclerview.OverlayLayoutManager;
+import org.zky.zky.widget.recyclerview.TestBean;
+import org.zky.zky.widget.recyclerview.ViewHolder;
 import org.zky.zky.utils.GetRes;
 
 import java.util.ArrayList;

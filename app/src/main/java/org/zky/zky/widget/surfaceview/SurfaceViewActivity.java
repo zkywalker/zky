@@ -1,9 +1,11 @@
-package org.zky.zky;
+package org.zky.zky.widget.surfaceview;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import org.zky.zky.BaseThemeActivity;
+import org.zky.zky.R;
 import org.zky.zky.utils.GetRes;
 import org.zky.zky.widget.surfaceview.RockerView;
 

@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import org.zky.zky.utils.GetRes;
-import org.zky.zky.widget.Indicator.IndicatorController;
 import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
+import org.zky.zky.widget.WidgetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

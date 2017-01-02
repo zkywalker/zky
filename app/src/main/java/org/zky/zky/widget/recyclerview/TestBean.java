@@ -1,4 +1,4 @@
-package org.zky.zky.recyclerview;
+package org.zky.zky.widget.recyclerview;
 
 /**
  * Created by zkywalker on 2016/12/25.

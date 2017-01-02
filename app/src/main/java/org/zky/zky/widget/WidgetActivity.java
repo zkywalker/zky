@@ -1,11 +1,15 @@
-package org.zky.zky;
+package org.zky.zky.widget;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import org.zky.zky.BaseThemeActivity;
+import org.zky.zky.R;
 import org.zky.zky.utils.GetRes;
+import org.zky.zky.widget.recyclerview.RecyclerViewActivity;
+import org.zky.zky.widget.surfaceview.SurfaceViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

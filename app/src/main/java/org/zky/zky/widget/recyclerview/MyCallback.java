@@ -1,4 +1,4 @@
-package org.zky.zky.recyclerview;
+package org.zky.zky.widget.recyclerview;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
