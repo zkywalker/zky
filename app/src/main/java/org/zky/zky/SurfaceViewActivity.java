@@ -1,13 +1,11 @@
 package org.zky.zky;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.zky.zky.utils.GetText;
-import org.zky.zky.widget.RockerView;
+import org.zky.zky.utils.GetRes;
+import org.zky.zky.widget.surfaceview.RockerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +26,7 @@ public class SurfaceViewActivity extends BaseThemeActivity {
         setContentView(R.layout.activity_surface_view);
         ButterKnife.bind(this);
 
-        toolbar.setTitle(GetText.getString(R.string.rocker_view));
+        toolbar.setTitle(GetRes.getString(R.string.rocker_view));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -38,20 +36,20 @@ public class SurfaceViewActivity extends BaseThemeActivity {
                 String s = "";
                 switch (newStatus) {
                     case 0:
-                        s = GetText.getString(R.string.str_center);
+                        s = GetRes.getString(R.string.str_center);
                         break;
                     case 1:
-                        s = GetText.getString(R.string.str_up);
+                        s = GetRes.getString(R.string.str_up);
                         break;
                     case 2:
-                        s = GetText.getString(R.string.str_down);
+                        s = GetRes.getString(R.string.str_down);
 
                         break;
                     case 3:
-                        s = GetText.getString(R.string.str_left);
+                        s = GetRes.getString(R.string.str_left);
                         break;
                     case 4:
-                        s = GetText.getString(R.string.str_right);
+                        s = GetRes.getString(R.string.str_right);
                         break;
 
                 }

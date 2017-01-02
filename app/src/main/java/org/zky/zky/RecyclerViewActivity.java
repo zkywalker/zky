@@ -1,18 +1,16 @@
 package org.zky.zky;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.MenuItem;
 
 import org.zky.zky.recyclerview.MyAdapter;
 import org.zky.zky.recyclerview.MyCallback;
 import org.zky.zky.recyclerview.OverlayLayoutManager;
 import org.zky.zky.recyclerview.TestBean;
 import org.zky.zky.recyclerview.ViewHolder;
-import org.zky.zky.utils.GetText;
+import org.zky.zky.utils.GetRes;
 
 import java.util.ArrayList;
 
@@ -42,18 +40,18 @@ public class RecyclerViewActivity extends BaseThemeActivity {
 
     private void initData() {
         list = new ArrayList<>();
-        list.add(new TestBean((i++) + "   ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "   ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
-        list.add(new TestBean((i++) + "  ", GetText.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "   ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "   ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
+        list.add(new TestBean((i++) + "  ", GetRes.getString(R.string.str_test)));
     }
 
     private void initView() {
-        toolbar.setTitle(GetText.getString(R.string.recycler_view_card));
+        toolbar.setTitle(GetRes.getString(R.string.recycler_view_card));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rv.setAdapter(adapter = new MyAdapter<TestBean>(this, list, R.layout.item_recycler_view) {

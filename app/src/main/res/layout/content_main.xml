@@ -13,7 +13,14 @@
     tools:context="org.zky.zky.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-<org.zky.zky.widget.PaintView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<FrameLayout
+    android:id="@+id/indicator_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <Button
+        android:layout_below="@+id/indicator_container"
+        android:onClick="indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 </RelativeLayout>

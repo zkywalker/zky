@@ -16,11 +16,11 @@ public class PreferenceUtils {
 
     public static String getTheme(Context context){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getString(GetText.getString(R.string.key_theme), BaseThemeActivity.THEME_DEFAULT);
+        return sp.getString(GetRes.getString(R.string.key_theme), BaseThemeActivity.THEME_DEFAULT);
     }
 
     public static void setTheme(Context context,String theme){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        sp.edit().putString(GetText.getString(R.string.key_theme),theme).apply();
+        sp.edit().putString(GetRes.getString(R.string.key_theme),theme).apply();
     }
 }

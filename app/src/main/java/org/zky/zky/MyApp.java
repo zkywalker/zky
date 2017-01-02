@@ -2,7 +2,7 @@ package org.zky.zky;
 
 import android.app.Application;
 
-import org.zky.zky.utils.GetText;
+import org.zky.zky.utils.GetRes;
 
 /**
  * 包:org.zky.zky
@@ -16,7 +16,7 @@ public class MyApp extends Application {
 
         super.onCreate();
 
-        GetText.init(this);
+        GetRes.init(this);
 
     }
 }

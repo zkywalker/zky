@@ -2,12 +2,10 @@ package org.zky.zky;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 
-import org.zky.zky.utils.GetText;
+import org.zky.zky.utils.GetRes;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +24,7 @@ public class WidgetActivity extends BaseThemeActivity {
     }
 
     private void initView() {
-        toolbar.setTitle(GetText.getString(R.string.widget));
+        toolbar.setTitle(GetRes.getString(R.string.widget));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

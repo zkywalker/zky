@@ -1,4 +1,4 @@
-package org.zky.zky.widget;
+package org.zky.zky.widget.surfaceview;
 
 import android.content.Context;
 import android.graphics.Canvas;
