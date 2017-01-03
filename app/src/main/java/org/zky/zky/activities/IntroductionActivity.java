@@ -1,5 +1,6 @@
 package org.zky.zky.activities;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import org.zky.zky.R;
+import org.zky.zky.widget.Indicator.IndicatorController;
+import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 
 import java.util.List;
 
@@ -23,6 +26,9 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     private List<Fragment> fragments;
 
+    private int slideCount;
+    private IndicatorController controller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //请求窗口特色没有actionbar
@@ -32,10 +38,10 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_introduction);
-        initView();
+        initView(savedInstanceState);
     }
 
-    private   void initView(){
+    private   void initView(Bundle savedInstanceState){
         final Button btn_skip = (Button) findViewById(R.id.btn_skip);
         final Button btn_done = (Button) findViewById(R.id.btn_done);
         final ImageButton btn_next = (ImageButton) findViewById(R.id.ib_next);
@@ -56,6 +62,18 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
             @Override
             public void onPageSelected(int position) {
+                if (slideCount>1)
+                    controller.selectPosition(position);
+                //当滑到最后一页时
+                if (position ==slideCount-1){
+                    btn_skip.setVisibility(View.GONE);
+                    btn_next.setVisibility(View.GONE);
+                    btn_done.setVisibility(View.VISIBLE);
+                }else {
+                    btn_skip.setVisibility(View.VISIBLE);
+                    btn_next.setVisibility(View.VISIBLE);
+                    btn_done.setVisibility(View.GONE);
+                }
 
             }
 
@@ -64,7 +82,28 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
             }
         });
-    };
+        //init里添加slide
+        init(savedInstanceState);
+        slideCount = fragments.size();
+        //只有一个slide时
+        if (slideCount ==1){
+            btn_next.setVisibility(View.GONE);
+            btn_done.setVisibility(View.VISIBLE);
+            btn_skip.setVisibility(View.GONE);
+        }else {
+            controller = new IndicatorControllerImpl();
+            container.addView(controller.newInstance(this));
+            controller.initialize(slideCount);
+        }
+
+
+
+    }
+
+    public void addSlide(@NonNull Fragment fragment){
+        fragments.add(fragment);
+        adapter.notifyDataSetChanged();
+    }
 
     abstract void init(Bundle saveInstanceState);
     abstract void onSkip();
