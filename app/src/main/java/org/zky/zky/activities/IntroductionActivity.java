@@ -16,6 +16,7 @@ import org.zky.zky.R;
 import org.zky.zky.widget.Indicator.IndicatorController;
 import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class IntroductionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,7 +25,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     private PagerAdapter adapter;
 
-    private List<Fragment> fragments;
+    private List<Fragment> fragments = new ArrayList<>();
 
     private int slideCount;
     private IndicatorController controller;
@@ -45,7 +46,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         final Button btn_skip = (Button) findViewById(R.id.btn_skip);
         final Button btn_done = (Button) findViewById(R.id.btn_done);
         final ImageButton btn_next = (ImageButton) findViewById(R.id.ib_next);
-        final FrameLayout container = (FrameLayout) findViewById(R.id.indicator_container);
+        final FrameLayout container = (FrameLayout) findViewById(R.id.fl_indicator_container);
 
         btn_skip.setOnClickListener(this);
         btn_done.setOnClickListener(this);

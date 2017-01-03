@@ -12,6 +12,9 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
+
+        </activity>
+        <activity android:name=".activities.IntroImlActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,15 +25,7 @@
             android:name=".BaseThemeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".widget.surfaceview.SurfaceViewActivity" />
-        <activity android:name=".widget.recyclerview.RecyclerViewActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".widget.recyclerview.RecyclerViewActivity"/>
         <activity android:name=".widget.WidgetActivity" />
         <activity android:name=".SettingsActivity" />
     </application>
