@@ -29,3 +29,6 @@ preference fragment 实现 settings activity
 
 ###2016.1.1
 使用base activity 实现切换app的主题
+
+###2016.1.3
+实现一个introduction页面模板：shape实现indicator dot，view pager&fragment实现slide
