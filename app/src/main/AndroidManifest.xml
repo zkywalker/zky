@@ -11,24 +11,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".BaseThemeActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
         <activity
-            android:name=".widget.surfaceview.SurfaceViewActivity"
-             />
-        <activity
-            android:name=".widget.recyclerview.RecyclerViewActivity"
-            >
+            android:name=".BaseThemeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".widget.surfaceview.SurfaceViewActivity" />
+        <activity android:name=".widget.recyclerview.RecyclerViewActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -37,12 +31,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".widget.WidgetActivity"
-             />
-        <activity
-            android:name=".SettingsActivity"
-            />
+        <activity android:name=".widget.WidgetActivity" />
+        <activity android:name=".SettingsActivity" />
     </application>
 
 </manifest>

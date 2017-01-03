@@ -112,5 +112,7 @@
 
     <!--share preference key-->
     <string name="key_theme">key_theme</string>
+    <string name="skip">跳过</string>
+    <string name="done">完成</string>
 
 </resources>

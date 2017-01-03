@@ -38,6 +38,7 @@ public class SettingsActivity extends BaseThemeActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
+
             ListPreference preference = (ListPreference) findPreference(GetRes.getString(R.string.key_theme));
             setListPreferenceSummary(preference);
             preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -50,6 +51,7 @@ public class SettingsActivity extends BaseThemeActivity {
                 }
             });
         }
+
         public void setListPreferenceSummary(ListPreference preference){
             switch (PreferenceUtils.getTheme(getActivity())){
                 case THEME_DEFAULT:
