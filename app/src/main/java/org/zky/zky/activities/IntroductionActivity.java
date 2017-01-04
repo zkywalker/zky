@@ -25,10 +25,15 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     private PagerAdapter adapter;
 
+    private FrameLayout container;
+
     private List<Fragment> fragments = new ArrayList<>();
 
     private int slideCount;
+
     private IndicatorController controller;
+
+   private boolean showButton = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         final Button btn_skip = (Button) findViewById(R.id.btn_skip);
         final Button btn_done = (Button) findViewById(R.id.btn_done);
         final ImageButton btn_next = (ImageButton) findViewById(R.id.ib_next);
-        final FrameLayout container = (FrameLayout) findViewById(R.id.fl_indicator_container);
+        container = (FrameLayout) findViewById(R.id.fl_indicator_container);
 
         btn_skip.setOnClickListener(this);
         btn_done.setOnClickListener(this);
@@ -66,14 +71,16 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
                 if (slideCount>1)
                     controller.selectPosition(position);
                 //当滑到最后一页时
-                if (position ==slideCount-1){
-                    btn_skip.setVisibility(View.GONE);
-                    btn_next.setVisibility(View.GONE);
-                    btn_done.setVisibility(View.VISIBLE);
-                }else {
-                    btn_skip.setVisibility(View.VISIBLE);
-                    btn_next.setVisibility(View.VISIBLE);
-                    btn_done.setVisibility(View.GONE);
+                if (showButton){
+                    if (position ==slideCount-1){
+                        btn_skip.setVisibility(View.GONE);
+                        btn_next.setVisibility(View.GONE);
+                        btn_done.setVisibility(View.VISIBLE);
+                    }else {
+                        btn_skip.setVisibility(View.VISIBLE);
+                        btn_next.setVisibility(View.VISIBLE);
+                        btn_done.setVisibility(View.GONE);
+                    }
                 }
 
             }
@@ -87,18 +94,42 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         init(savedInstanceState);
         slideCount = fragments.size();
         //只有一个slide时
-        if (slideCount ==1){
+        if (slideCount ==1&&showButton){
             btn_next.setVisibility(View.GONE);
             btn_done.setVisibility(View.VISIBLE);
             btn_skip.setVisibility(View.GONE);
         }else {
-            controller = new IndicatorControllerImpl();
-            container.addView(controller.newInstance(this));
-            controller.initialize(slideCount);
+            initIndicator();
+        }
+
+        //是否显示按钮
+        if (showButton){
+            btn_next.setVisibility(View.VISIBLE);
+            btn_done.setVisibility(View.GONE);
+            btn_skip.setVisibility(View.VISIBLE);
+        }else {
+            btn_next.setVisibility(View.GONE);
+            btn_done.setVisibility(View.GONE);
+            btn_skip.setVisibility(View.GONE);
         }
 
 
+    }
 
+    private   void initIndicator(){
+        if (controller ==null){
+            controller = new IndicatorControllerImpl();
+        }
+        container.addView(controller.newInstance(this));
+        controller.initialize(slideCount);
+    };
+
+    public void setCustomIndicator(IndicatorController controller){
+        this.controller = controller;
+    }
+
+    public void setShowButton(boolean show){
+        showButton = show;
     }
 
     public void addSlide(@NonNull Fragment fragment){
