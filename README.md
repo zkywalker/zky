@@ -32,3 +32,6 @@ preference fragment 实现 settings activity
 
 ###2016.1.3
 实现一个introduction页面模板：shape实现indicator dot，view pager&fragment实现slide
+
+###2016.1.4
+实现一个splash模板：countDownTimer实现倒计时indicator
