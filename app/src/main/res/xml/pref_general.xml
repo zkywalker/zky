@@ -13,10 +13,10 @@
         android:title="@string/pref_title_theme" />
 
     <SwitchPreference
-        android:defaultValue="true"
-        android:key="s_switch"
-        android:summary="@string/pref_description_social_recommendations"
-        android:title="@string/pref_title_social_recommendations" />
+        android:defaultValue="false"
+        android:key="@string/key_splash"
+        android:summary="@string/pref_description_splash"
+        android:title="@string/pref_title_splash" />
     <SwitchPreference
         android:defaultValue="true"
         android:key="info_switch"

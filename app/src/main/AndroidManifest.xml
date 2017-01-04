@@ -14,7 +14,7 @@
             android:label="@string/app_name">
 
         </activity>
-        <activity android:name=".activities.DefaultIntroActivity">
+        <activity android:name=".activities.Introduction.DefaultIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
