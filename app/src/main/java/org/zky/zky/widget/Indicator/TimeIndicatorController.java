@@ -13,4 +13,5 @@ public interface TimeIndicatorController {
     View newInstance(@NonNull Context context);
     void initialize(long count);
     void start();
+    void setOnCountDownListener(TimeIndicatorControllerImpl.OnCountDownListener listener);
 }

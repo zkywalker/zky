@@ -1,4 +1,4 @@
-package org.zky.zky.activities.Introduction;
+package org.zky.zky.activities.introduction;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

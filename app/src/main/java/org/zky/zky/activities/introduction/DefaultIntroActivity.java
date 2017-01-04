@@ -1,4 +1,4 @@
-package org.zky.zky.activities.Introduction;
+package org.zky.zky.activities.introduction;
 
 import android.content.Intent;
 import android.os.Bundle;

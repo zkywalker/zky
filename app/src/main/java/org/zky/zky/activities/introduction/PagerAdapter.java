@@ -1,4 +1,4 @@
-package org.zky.zky.activities.Introduction;
+package org.zky.zky.activities.introduction;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

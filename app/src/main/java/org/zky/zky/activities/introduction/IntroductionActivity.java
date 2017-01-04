@@ -1,4 +1,4 @@
-package org.zky.zky.activities.Introduction;
+package org.zky.zky.activities.introduction;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,6 +19,9 @@ import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *介绍页面的基类
+ * */
 public abstract class IntroductionActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager vp_slide;
@@ -33,7 +36,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     private IndicatorController controller;
 
-   private boolean showButton = true;
+    private boolean showButton = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,13 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         //设置全屏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_introduction);
         initView(savedInstanceState);
     }
 
-    private   void initView(Bundle savedInstanceState){
+    private void initView(Bundle savedInstanceState) {
         final Button btn_skip = (Button) findViewById(R.id.btn_skip);
         final Button btn_done = (Button) findViewById(R.id.btn_done);
         final ImageButton btn_next = (ImageButton) findViewById(R.id.ib_next);
@@ -58,7 +61,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         btn_next.setOnClickListener(this);
 
         vp_slide = (ViewPager) findViewById(R.id.vp_slide);
-        adapter = new PagerAdapter(this.getSupportFragmentManager(),fragments);
+        adapter = new PagerAdapter(this.getSupportFragmentManager(), fragments);
         vp_slide.setAdapter(adapter);
         vp_slide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -68,15 +71,15 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
             @Override
             public void onPageSelected(int position) {
-                if (slideCount>1)
+                if (slideCount > 1)
                     controller.selectPosition(position);
                 //当滑到最后一页时
-                if (showButton){
-                    if (position ==slideCount-1){
+                if (showButton) {
+                    if (position == slideCount - 1) {
                         btn_skip.setVisibility(View.GONE);
                         btn_next.setVisibility(View.GONE);
                         btn_done.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         btn_skip.setVisibility(View.VISIBLE);
                         btn_next.setVisibility(View.VISIBLE);
                         btn_done.setVisibility(View.GONE);
@@ -94,20 +97,20 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
         init(savedInstanceState);
         slideCount = fragments.size();
         //只有一个slide时
-        if (slideCount ==1&&showButton){
+        if (slideCount == 1 && showButton) {
             btn_next.setVisibility(View.GONE);
             btn_done.setVisibility(View.VISIBLE);
             btn_skip.setVisibility(View.GONE);
-        }else {
+        } else {
             initIndicator();
         }
 
         //是否显示按钮
-        if (showButton){
+        if (showButton) {
             btn_next.setVisibility(View.VISIBLE);
             btn_done.setVisibility(View.GONE);
             btn_skip.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             btn_next.setVisibility(View.GONE);
             btn_done.setVisibility(View.GONE);
             btn_skip.setVisibility(View.GONE);
@@ -116,34 +119,38 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     }
 
-    private   void initIndicator(){
-        if (controller ==null){
+    private void initIndicator() {
+        if (controller == null) {
             controller = new IndicatorControllerImpl();
         }
         container.addView(controller.newInstance(this));
         controller.initialize(slideCount);
-    };
+    }
 
-    public void setCustomIndicator(IndicatorController controller){
+    ;
+
+    public void setCustomIndicator(IndicatorController controller) {
         this.controller = controller;
     }
 
-    public void setShowButton(boolean show){
+    public void setShowButton(boolean show) {
         showButton = show;
     }
 
-    public void addSlide(@NonNull Fragment fragment){
+    public void addSlide(@NonNull Fragment fragment) {
         fragments.add(fragment);
         adapter.notifyDataSetChanged();
     }
 
     abstract void init(Bundle saveInstanceState);
+
     abstract void onSkip();
+
     abstract void onDone();
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_skip:
                 onSkip();
                 break;
@@ -152,7 +159,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
                 break;
             case R.id.ib_next:
                 //圆滑切换
-                vp_slide.setCurrentItem(vp_slide.getCurrentItem()+1,true);
+                vp_slide.setCurrentItem(vp_slide.getCurrentItem() + 1, true);
                 break;
         }
     }

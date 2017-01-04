@@ -3,6 +3,7 @@ package org.zky.zky.widget.Indicator;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,15 +16,16 @@ import org.zky.zky.R;
  */
 
 public class TimeIndicatorControllerImpl implements TimeIndicatorController {
+    private static final String TAG = "TimeIndicatorController";
     private TextView tv_skip;
 
     private ProgressBar pb;
 
-    private float mills;
-
     private CountDownTimer timer;
 
     private OnCountDownListener listener;
+
+    private long millis;
 
     @Override
     public View newInstance(@NonNull Context context) {
@@ -35,13 +37,14 @@ public class TimeIndicatorControllerImpl implements TimeIndicatorController {
 
     @Override
     public void initialize(long countMillis) {
-        pb.setMax((int) countMillis);
+        millis = countMillis;
+//        pb.setMax((int) countMillis);
         if (timer==null){
             timer = new CountDownTimer(countMillis,1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    pb.setProgress((int) millisUntilFinished);
-
+                    pb.setProgress((int) ((millis -millisUntilFinished)/millis*100));
+                    Log.e(TAG, "onTick: "+millisUntilFinished);
                     if (listener!=null)
                         listener.onTick();
                 }
@@ -61,11 +64,12 @@ public class TimeIndicatorControllerImpl implements TimeIndicatorController {
             timer.start();
     }
 
+    @Override
     public void setOnCountDownListener(OnCountDownListener listener){
         this.listener = listener;
     }
 
-    interface OnCountDownListener{
+    public interface OnCountDownListener{
         void onTick();
         void onFinish();
     }
