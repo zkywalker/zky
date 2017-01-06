@@ -148,6 +148,7 @@ public abstract class IntroductionActivity extends AppCompatActivity implements 
 
     abstract void onDone();
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

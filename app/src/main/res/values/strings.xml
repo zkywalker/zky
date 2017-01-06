@@ -37,7 +37,7 @@
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 
-    <string name="pref_title_splash">splash</string>
+    <string name="pref_title_splash">splash页面</string>
     <string name="pref_description_splash">是否显示splash screen
     </string>
 
@@ -115,5 +115,8 @@
     <string name="key_theme">key_theme</string>
     <string name="skip">跳过</string>
     <string name="done">完成</string>
+    <string name="pref_description_intro">是否进入app显示介绍页面</string>
+    <string name="key_intro">key_introduction</string>
+    <string name="pref_title_intro">介绍页面</string>
 
 </resources>

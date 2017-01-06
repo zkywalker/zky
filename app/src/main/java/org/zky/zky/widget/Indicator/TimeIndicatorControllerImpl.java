@@ -19,6 +19,7 @@ public class TimeIndicatorControllerImpl implements TimeIndicatorController {
     private static final String TAG = "TimeIndicatorController";
     private TextView tv_skip;
 
+    //可以自己实现一个圆形进度条代替文字和这个
     private ProgressBar pb;
 
     private CountDownTimer timer;

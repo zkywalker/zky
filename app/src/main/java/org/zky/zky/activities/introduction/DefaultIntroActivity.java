@@ -1,11 +1,14 @@
 package org.zky.zky.activities.introduction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import org.zky.zky.MainActivity;
 import org.zky.zky.R;
+import org.zky.zky.utils.GetRes;
 
 /**
  * Created by zkywalker on 2017/1/3.
@@ -57,6 +60,8 @@ public class DefaultIntroActivity extends IntroductionActivity {
     void onDone() {
     loadMainActivity();
     }
+
+
 
     public void getStarted(View v) {
         loadMainActivity();
