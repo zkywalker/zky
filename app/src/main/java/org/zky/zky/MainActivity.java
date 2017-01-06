@@ -23,9 +23,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseThemeActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    @BindView(R.id.indicator_container)
-    FrameLayout container;
-    private IndicatorControllerImpl controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,10 +42,7 @@ public class MainActivity extends BaseThemeActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        controller = new IndicatorControllerImpl();
-        View indicator = controller.newInstance(this);
-        controller.initialize(5);
-        container.addView(indicator);
+
     }
 
     @Override
@@ -124,14 +118,5 @@ public class MainActivity extends BaseThemeActivity
         return true;
     }
 
-    int index = 0;
 
-    public void indicator(View view) {
-        if (index == 5) {
-            controller.selectPosition(4);
-            index = 0;
-        }
-        controller.selectPosition(index);
-        index = index + 1;
-    }
 }

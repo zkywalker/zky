@@ -11,16 +11,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.zky.zky.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:background="@color/one"
+    >
 
-<FrameLayout
-    android:id="@+id/indicator_container"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-    <Button
-        android:layout_below="@+id/indicator_container"
-        android:onClick="indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+    <ImageView
+        android:transitionName="ImageView"
+        android:layout_width="84dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:src="@drawable/ic_slide1" />
 </RelativeLayout>

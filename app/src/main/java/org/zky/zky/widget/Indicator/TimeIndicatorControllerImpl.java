@@ -43,7 +43,8 @@ public class TimeIndicatorControllerImpl implements TimeIndicatorController {
             timer = new CountDownTimer(countMillis,1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    pb.setProgress((int) ((millis -millisUntilFinished)/millis*100));
+//                    pb.setProgress((int) ((millis -millisUntilFinished)/millis*100));
+                    tv_skip.setText(millisUntilFinished/1000+"S");
                     Log.e(TAG, "onTick: "+millisUntilFinished);
                     if (listener!=null)
                         listener.onTick();
