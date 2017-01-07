@@ -14,11 +14,9 @@
     tools:showIn="@layout/app_bar_main"
     >
 
-    <org.zky.zky.widget.StempView
+    <org.zky.zky.widget.StampView
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:elevation="6dp"
-        android:background="@android:color/transparent"
         android:outlineProvider="bounds"
         >
         <ImageView
@@ -26,7 +24,7 @@
             android:layout_height="match_parent"
             android:src="@mipmap/ic_launcher"
             />
-    </org.zky.zky.widget.StempView>
+    </org.zky.zky.widget.StampView>
 
 
 </RelativeLayout>

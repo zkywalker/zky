@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
  * Created by zhangkun on 2017/1/7.
  */
 
-public class StempView extends FrameLayout{
+public class StampView extends FrameLayout{
     private Context mContext;
 
     private Paint mPaint;
@@ -45,22 +45,23 @@ public class StempView extends FrameLayout{
     private int remainV;
 
 
-    public StempView(@NonNull Context context) {
+    public StampView(@NonNull Context context) {
         super(context);
         initialize(context,null,0);
     }
 
-    public StempView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public StampView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initialize(context,attrs,0);
     }
 
-    public StempView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public StampView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context,attrs,defStyleAttr);
     }
 
     private void initialize(Context context,AttributeSet attrs,int defStyleAttr){
+
         mContext = context;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 //        mPaint.setAlpha(0);
