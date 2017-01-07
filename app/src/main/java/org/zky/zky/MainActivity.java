@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import org.zky.zky.activities.ActivitiesActivity;
 import org.zky.zky.utils.GetRes;
 import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 import org.zky.zky.widget.WidgetActivity;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseThemeActivity
         } else if (id == R.id.nav_view) {
 
         } else if (id == R.id.nav_activity) {
-
+            startActivity(new Intent(this, ActivitiesActivity.class));
         } else if (id == R.id.nav_sdk) {
 
         } else if (id == R.id.nav_share) {
