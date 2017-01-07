@@ -12,15 +12,21 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.zky.zky.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="@color/one"
     >
 
-    <ImageView
-        android:transitionName="ImageView"
-        android:layout_width="84dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:src="@drawable/ic_slide1" />
+    <org.zky.zky.widget.StempView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:elevation="6dp"
+        android:background="@android:color/transparent"
+        android:outlineProvider="bounds"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            />
+    </org.zky.zky.widget.StempView>
+
+
 </RelativeLayout>
