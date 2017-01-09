@@ -42,4 +42,8 @@ public class ViewPagerAdapter extends PagerAdapter {
     public CharSequence getPageTitle(int position) {
         return (String) views.get(position).getTag();
     }
+
+    public List<View> getViews(){
+        return views;
+    }
 }
