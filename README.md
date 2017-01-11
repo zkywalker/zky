@@ -37,4 +37,6 @@ preference fragment 实现 settings activity
 实现一个splash模板：countDownTimer实现倒计时indicator
 
 ###2016.1.11
-实现一个邮票(礼券)控件:path，path的填充
+实现一个邮票(礼券)控件:path，path的填充 
+
+//TODO bug：一定要加background才行，海拔属性不协调

@@ -25,6 +25,8 @@ public class StampView extends FrameLayout{
 
     private Paint mPaint;
 
+    private Path mPath;
+
     private int mWidth;
 
     private int mHeight;
@@ -92,79 +94,68 @@ public class StampView extends FrameLayout{
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        canvas.drawColor(Color.RED);
         super.onDraw(canvas);
-//        canvas.drawRect(0,0,mWidth,mHeight,mPaint);
-
-//        Paint p = new Paint();
-//        p.setColor(Color.TRANSPARENT);
-//        p.setStyle(Paint.Style.FILL);
-//        p.setAntiAlias(true);
-//        for (int i=0;i<circleNumV;i++){
-//            float x = space+radius+remainV/2+((space+radius*2)*i);
-//            canvas.drawCircle(x,0,radius,p);
-//            canvas.drawCircle(x,getHeight(),radius,p);
-//        }
-
-        Path path = new Path();
+        if (mPath ==null){
+            mPath = new Path();
+        }
         //stamp上方的path
-        path.moveTo(0,0);
+        mPath.moveTo(0,0);
         for (int i = 0; i < circleNumV; i++) {
             float startX = space+radius+remainV/2+(space+radius*2)*i;
-            path.lineTo(startX,0);
-            path.arcTo(startX,-radius,startX+2*radius,radius,0,180,true);
-            path.moveTo(startX+2*radius,0);
+            mPath.lineTo(startX,0);
+            mPath.arcTo(startX,-radius,startX+2*radius,radius,0,180,true);
+            mPath.moveTo(startX+2*radius,0);
             if (i==circleNumV-1){
                 Log.e(TAG, "onDraw: startX:"+startX );
-                path.lineTo(mWidth,0);
-                path.moveTo(mWidth,0);
+                mPath.lineTo(mWidth,0);
+                mPath.moveTo(mWidth,0);
             }
 
         }
         //绘制右侧
-//        path.lineTo(mWidth,mHeight);
+//        mPath.lineTo(mWidth,mHeight);
         for (int i = 0;i<circleNumH;i++){
             float startY = space+radius+remainH/2+(space+radius*2)*i;
-            path.lineTo(mWidth,startY);
-            path.arcTo(mWidth-radius,startY,mWidth+radius,startY+2*radius,90,180,true);
-            path.moveTo(mWidth,startY+2*radius);
+            mPath.lineTo(mWidth,startY);
+            mPath.arcTo(mWidth-radius,startY,mWidth+radius,startY+2*radius,90,180,true);
+            mPath.moveTo(mWidth,startY+2*radius);
             if (i==circleNumH-1){
-                path.lineTo(mWidth,mHeight);
-                path.moveTo(mWidth,mHeight);
+                mPath.lineTo(mWidth,mHeight);
+                mPath.moveTo(mWidth,mHeight);
             }
         }
         //绘制左侧
-        path.moveTo(0,0);
+        mPath.moveTo(0,0);
         Log.e(TAG, "onDraw: radius:"+radius+",remain:"+remainH );
         for (int i = 0;i<circleNumH;i++){
             float startY = space+radius+remainH/2+(space+radius*2)*i;
-            path.lineTo(0,startY);
-            path.arcTo(0-radius,startY,radius,startY+2*radius,90,-180,true);
-            path.moveTo(0,startY+2*radius);
+            mPath.lineTo(0,startY);
+            mPath.arcTo(0-radius,startY,radius,startY+2*radius,90,-180,true);
+            mPath.moveTo(0,startY+2*radius);
             if (i==circleNumH-1){
-                path.lineTo(0,mHeight);
-                path.moveTo(0,mHeight);
+                mPath.lineTo(0,mHeight);
+                mPath.moveTo(0,mHeight);
             }
         }
-        path.lineTo(0,mHeight);
-        path.moveTo(0,mHeight);
+        mPath.lineTo(0,mHeight);
+        mPath.moveTo(0,mHeight);
         for (int i = 0; i < circleNumV; i++) {
             float startX = space+radius+remainV/2+(space+radius*2)*i;
-            path.lineTo(startX,mHeight);
-            path.arcTo(startX,mHeight-radius,startX+2*radius,mHeight+radius,0,-180,true);
-            path.moveTo(startX+2*radius,mHeight);
+            mPath.lineTo(startX,mHeight);
+            mPath.arcTo(startX,mHeight-radius,startX+2*radius,mHeight+radius,0,-180,true);
+            mPath.moveTo(startX+2*radius,mHeight);
             if (i==circleNumV-1)
-                path.lineTo(mWidth,mHeight);
+                mPath.lineTo(mWidth,mHeight);
         }
-//        path.close();
-        path.moveTo(0,0);
-        path.lineTo(mWidth,0);
-        path.lineTo(mWidth,mHeight);
-        path.lineTo(0,mHeight);
-        path.lineTo(0,0);
+//        mPath.close();
+        mPath.moveTo(0,0);
+        mPath.lineTo(mWidth,0);
+        mPath.lineTo(mWidth,mHeight);
+        mPath.lineTo(0,mHeight);
+        mPath.lineTo(0,0);
 
-        path.setFillType(Path.FillType.EVEN_ODD);
-        canvas.drawPath(path,mPaint);
+        mPath.setFillType(Path.FillType.EVEN_ODD);
+        canvas.drawPath(mPath,mPaint);
     }
 
     public static int dp2px(Context context, float value){
