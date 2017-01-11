@@ -20,6 +20,7 @@
         android:layout_height="100dp"
         android:outlineProvider="bounds"
         android:background="@android:color/transparent"
+        android:elevation="5dp"
         >
         <ImageView
             android:layout_width="match_parent"

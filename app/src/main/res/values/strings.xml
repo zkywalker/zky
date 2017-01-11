@@ -119,5 +119,6 @@
     <string name="key_intro">key_introduction</string>
     <string name="pref_title_intro">介绍页面</string>
     <string name="defaultIntroductionActivity">defaultIntroductionActivity</string>
+    <string name="stamp">邮票/礼券</string>
 
 </resources>

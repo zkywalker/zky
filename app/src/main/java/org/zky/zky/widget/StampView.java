@@ -2,7 +2,6 @@ package org.zky.zky.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.AttrRes;
@@ -11,9 +10,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+
+import org.zky.zky.R;
 
 /**
  * 邮票视图
@@ -26,19 +25,15 @@ public class StampView extends FrameLayout{
 
     private Paint mPaint;
 
-    private int defaultWidth = 300;
-
-    private int defaultHeight = 120;
-
     private int mWidth;
 
     private int mHeight;
 
     //半圆间隔
-    private int space = 20;
+    private int space = 3;
 
     //半圆半径
-    private int radius = 16;
+    private int radius = 2;
 
     private int circleNumH ;
 
@@ -70,38 +65,10 @@ public class StampView extends FrameLayout{
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 //        mPaint.setAlpha(0);
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.GREEN);
+        mPaint.setColor(getResources().getColor(R.color.three));
 //        mPaint.setStrokeWidth(4);
-
-    }
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        mWidth = MeasureWidth(widthMeasureSpec);
-//        mHeight = MeasureHeight(heightMeasureSpec);
-//        setMeasuredDimension(mWidth,mHeight);
-//    }
-
-    private int MeasureWidth(int measureSpec) {
-        int mode = MeasureSpec.getMode(measureSpec);
-        int width = MeasureSpec.getSize(measureSpec);
-        if (mode == MeasureSpec.EXACTLY){
-            return width;
-        }else if (mode == MeasureSpec.AT_MOST){
-            return Math.min(width, dp2px(mContext, defaultWidth));
-        }
-        return defaultWidth;
-    }
-
-    private int MeasureHeight(int measureSpec) {
-        int mode = MeasureSpec.getMode(measureSpec);
-        int height = MeasureSpec.getSize(measureSpec);
-        if (mode == MeasureSpec.EXACTLY){
-            return height;
-        }else if (mode == MeasureSpec.AT_MOST){
-            return Math.min(height, dp2px(mContext, defaultHeight));
-        }
-        return defaultHeight;
+        radius = dp2px(context,radius);
+        space = dp2px(context,space);
     }
 
     @Override
@@ -172,7 +139,7 @@ public class StampView extends FrameLayout{
         for (int i = 0;i<circleNumH;i++){
             float startY = space+radius+remainH/2+(space+radius*2)*i;
             path.lineTo(0,startY);
-            path.arcTo(0-radius,startY,0+radius,startY+2*radius,90,-180,true);
+            path.arcTo(0-radius,startY,radius,startY+2*radius,90,-180,true);
             path.moveTo(0,startY+2*radius);
             if (i==circleNumH-1){
                 path.lineTo(0,mHeight);
