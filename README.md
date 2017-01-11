@@ -35,3 +35,6 @@ preference fragment 实现 settings activity
 
 ###2016.1.4
 实现一个splash模板：countDownTimer实现倒计时indicator
+
+###2016.1.11
+实现一个邮票(礼券)控件:path，path的填充
