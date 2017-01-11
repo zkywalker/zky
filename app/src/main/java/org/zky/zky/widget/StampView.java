@@ -9,6 +9,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
  */
 
 public class StampView extends FrameLayout{
+    private static final String TAG = "StampView";
     private Context mContext;
 
     private Paint mPaint;
@@ -33,16 +35,18 @@ public class StampView extends FrameLayout{
     private int mHeight;
 
     //半圆间隔
-    private int space = 10;
+    private int space = 20;
 
     //半圆半径
-    private int radius = 6;
+    private int radius = 16;
 
     private int circleNumH ;
 
     private int circleNumV ;
 
     private int remainV;
+
+    private int remainH;
 
 
     public StampView(@NonNull Context context) {
@@ -106,9 +110,17 @@ public class StampView extends FrameLayout{
         mWidth =w;
         mHeight = h;
         if (remainV==0){
-            remainV = (w-space)%(2*radius+space);
+            remainV = (w-space)%(2*radius+space)+2*radius;
         }
-        circleNumV =((w-space)/(2*radius+space));
+        if (remainH==0){
+            remainH = (h-space)%(2*radius+space)+2*radius;
+            Log.e(TAG, "onSizeChanged: remainH:"+remainH+",h:"+h);
+        }
+        circleNumV =((w-space)/(2*radius+space))-1;
+        circleNumH =((h-space)/(2*radius+space))-1;
+        Log.e(TAG, "onSizeChanged: remainV:"+remainV+",w:"+w+",circleNumV:"+circleNumV);
+
+
     }
 
     @Override
@@ -128,6 +140,7 @@ public class StampView extends FrameLayout{
 //        }
 
         Path path = new Path();
+        //stamp上方的path
         path.moveTo(0,0);
         for (int i = 0; i < circleNumV; i++) {
             float startX = space+radius+remainV/2+(space+radius*2)*i;
@@ -135,13 +148,37 @@ public class StampView extends FrameLayout{
             path.arcTo(startX,-radius,startX+2*radius,radius,0,180,true);
             path.moveTo(startX+2*radius,0);
             if (i==circleNumV-1){
+                Log.e(TAG, "onDraw: startX:"+startX );
                 path.lineTo(mWidth,0);
                 path.moveTo(mWidth,0);
             }
 
         }
-        path.lineTo(mWidth,mHeight);
+        //绘制右侧
+//        path.lineTo(mWidth,mHeight);
+        for (int i = 0;i<circleNumH;i++){
+            float startY = space+radius+remainH/2+(space+radius*2)*i;
+            path.lineTo(mWidth,startY);
+            path.arcTo(mWidth-radius,startY,mWidth+radius,startY+2*radius,90,180,true);
+            path.moveTo(mWidth,startY+2*radius);
+            if (i==circleNumH-1){
+                path.lineTo(mWidth,mHeight);
+                path.moveTo(mWidth,mHeight);
+            }
+        }
+        //绘制左侧
         path.moveTo(0,0);
+        Log.e(TAG, "onDraw: radius:"+radius+",remain:"+remainH );
+        for (int i = 0;i<circleNumH;i++){
+            float startY = space+radius+remainH/2+(space+radius*2)*i;
+            path.lineTo(0,startY);
+            path.arcTo(0-radius,startY,0+radius,startY+2*radius,90,-180,true);
+            path.moveTo(0,startY+2*radius);
+            if (i==circleNumH-1){
+                path.lineTo(0,mHeight);
+                path.moveTo(0,mHeight);
+            }
+        }
         path.lineTo(0,mHeight);
         path.moveTo(0,mHeight);
         for (int i = 0; i < circleNumV; i++) {
@@ -152,9 +189,14 @@ public class StampView extends FrameLayout{
             if (i==circleNumV-1)
                 path.lineTo(mWidth,mHeight);
         }
-        path.close();
+//        path.close();
+        path.moveTo(0,0);
+        path.lineTo(mWidth,0);
+        path.lineTo(mWidth,mHeight);
+        path.lineTo(0,mHeight);
+        path.lineTo(0,0);
 
-        path.setFillType(Path.FillType.INVERSE_EVEN_ODD);
+        path.setFillType(Path.FillType.EVEN_ODD);
         canvas.drawPath(path,mPaint);
     }
 

@@ -12,12 +12,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.zky.zky.MainActivity"
     tools:showIn="@layout/app_bar_main"
+    android:clipChildren="false"
     >
 
     <org.zky.zky.widget.StampView
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:outlineProvider="bounds"
+        android:background="@android:color/transparent"
         >
         <ImageView
             android:layout_width="match_parent"
