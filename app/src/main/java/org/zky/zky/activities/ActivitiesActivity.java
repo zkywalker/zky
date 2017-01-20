@@ -1,5 +1,10 @@
 package org.zky.zky.activities;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RotateDrawable;
+import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -26,6 +31,8 @@ public class ActivitiesActivity extends BaseThemeActivity {
     @BindView(R.id.vp)
     ViewPager viewPager;
 
+    int level = 1000;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,24 +50,30 @@ public class ActivitiesActivity extends BaseThemeActivity {
         intro.setTag(GetRes.getString(R.string.pref_title_intro));
         View splash = View.inflate(this, R.layout.view_pager_splash, null);
         splash.setTag(GetRes.getString(R.string.pref_title_splash));
+        View other =View.inflate(this,R.layout.view_pager_other,null);
+        other.setTag(GetRes.getString(R.string.other));
         List<View> list = new ArrayList<>();
         list.add(intro);
         list.add(splash);
+        list.add(other);
         viewPager.setAdapter(new ViewPagerAdapter(list));
 //        tabLayout.setupWithViewPager(viewPager);
-        TabLayout.Tab tab1 = tabLayout.newTab();
-        tab1.setText("1");
-        TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setText("2");
-        tabLayout.addTab(tab1);
-        tabLayout.addTab(tab2);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        for (int i = 0; i < list.size(); i++) {
+            TabLayout.Tab tab = tabLayout.newTab();
+            tab.setText((String) list.get(i).getTag());
+            tab.setTag(i);
+            tabLayout.addTab(tab);
+        }
+
+
         TabLayout.TabLayoutOnPageChangeListener changeListener = new TabLayout.TabLayoutOnPageChangeListener(tabLayout);
         viewPager.addOnPageChangeListener(changeListener);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tab.getIcon();
+                viewPager.setCurrentItem((Integer) tab.getTag());
+
             }
 
             @Override
@@ -77,6 +90,20 @@ public class ActivitiesActivity extends BaseThemeActivity {
     }
 
     public void introduction(View view){
+
+    }
+
+    private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
+    private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
+
+    public void chrome(View view) {
+//        String url = "https://github.com/GoogleChrome/custom-tabs-client.git";
+        String url = "http://zhangkun.site";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        Bundle bundle = new Bundle();
+        bundle.putBinder(EXTRA_CUSTOM_TABS_SESSION,null);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 }

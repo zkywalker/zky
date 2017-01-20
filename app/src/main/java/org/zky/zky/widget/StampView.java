@@ -98,6 +98,7 @@ public class StampView extends FrameLayout{
         if (mPath ==null){
             mPath = new Path();
         }
+        mPath.reset();
         //stamp上方的path
         mPath.moveTo(0,0);
         for (int i = 0; i < circleNumV; i++) {
