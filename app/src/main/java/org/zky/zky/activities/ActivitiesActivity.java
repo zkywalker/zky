@@ -1,11 +1,15 @@
 package org.zky.zky.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RotateDrawable;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +18,11 @@ import android.view.View;
 
 import org.zky.zky.BaseThemeActivity;
 import org.zky.zky.R;
+import org.zky.zky.activities.introduction.DefaultIntroActivity;
+import org.zky.zky.activities.introduction.IntroductionActivity;
+import org.zky.zky.activities.splash.SplashActivity;
 import org.zky.zky.utils.GetRes;
+import org.zky.zky.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,20 +98,39 @@ public class ActivitiesActivity extends BaseThemeActivity {
     }
 
     public void introduction(View view){
-
+        startActivity(new Intent(this, DefaultIntroActivity.class));
     }
 
+
+    /**
+     * 参考：
+     * https://www.youtube.com/?gl=HK&tab=w1
+     * http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0914/3449.html
+     * https://github.com/GoogleChrome/custom-tabs-client.git
+     *
+     */
     private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
     private static final String EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = "android.support.customtabs.extra.TOOLBAR_COLOR";
-
     public void chrome(View view) {
-//        String url = "https://github.com/GoogleChrome/custom-tabs-client.git";
         String url = "http://zhangkun.site";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         Bundle bundle = new Bundle();
         bundle.putBinder(EXTRA_CUSTOM_TABS_SESSION,null);
         intent.putExtras(bundle);
+        intent.putExtra(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR,getResources().getColor(R.color.colorPrimary));
         startActivity(intent);
 
+    }
+
+    /**
+     * https://material.io/guidelines/patterns/launch-screens.html
+     * 新的md指南里添加了launch screens章节，即splash screen
+     */
+    public void splash(View view) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.edit().putBoolean(GetRes.getString(R.string.key_splash), true)
+                .putBoolean(GetRes.getString(R.string.key_intro),false)
+                .apply();
+        startActivity(new Intent(this, SplashActivity.class));
     }
 }
