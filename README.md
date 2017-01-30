@@ -2,7 +2,7 @@
 
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com/)
-[![Release](https://img.shields.io/badge/release-1.0.0-blue.svg)](https://www.android.com/)
+[![Release](https://img.shields.io/badge/release-0.1.0-blue.svg)](https://github.com/zkywalker/zky/releases)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ##简介
@@ -10,7 +10,7 @@
 
 ##日志
 
-![log](https://github.com/zkywalker/zky/LOG.md)
+[log](https://github.com/zkywalker/zky/LOG.md)
 
 ## 截屏
 ![screenshot]()
@@ -21,13 +21,9 @@
 zhan9kun#gmail.com
 
 ## 开源项目
-
-名称 | 介绍
-
---------- | --------
-
-[Android Support Libraries](https://developer.android.com/topic/libraries/support-library/index.html) | The Android Support Library offers a number of features that are not built into the framework. These libraries offer backward-compatible versions of new features, provide useful UI elements that are not included in the framework, and provide a range of utilities that apps can draw on.
-[Gson](https://github.com/google/gson) | A Java serialization/deserialization library that can convert Java Objects into JSON and back.
+本项目受到了诸多开源项目的帮助
+- [AOSP](http://source.android.com/)
+- [okhttp](https://github.com/square/okhttp)
 
 ##许可
 ```
