@@ -10,10 +10,9 @@
 
 ##日志
 
-[log](https://github.com/zkywalker/zky/LOG.md)
+[log](LOG.md)
 
 ## 截屏
-![screenshot]()
 
 ##下载
 
