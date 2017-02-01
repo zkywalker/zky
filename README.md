@@ -8,16 +8,31 @@
 ##简介
 日常学习归档做的一个android 模板app。包含了Android日常开发中的一些控件、页面、绘制动画等，可以拿来学习参考或直接使用
 
-##日志
-
-[log](LOG.md)
 
 ## 截屏
 
 ##下载
+[Github](https://github.com/zkywalker/zky/releases)
+##日志
 
-## 联系我
-zhan9kun#gmail.com
+[log](LOG.md)
+
+# Build
+
+Windows
+
+    > git clone https://github.com/zkywalker/zky
+    > cd zky
+    > gradlew app:assembleDebug
+
+Linux
+
+    $ git clone https://github.com/zkywalker/zky
+    $ cd zky
+    $ ./gradlew app:assembleDebug
+
+生成的 apk 文件在 app\build\outputs\apk 目录下
+
 
 ## 开源项目
 本项目受到了诸多开源项目的帮助

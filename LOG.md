@@ -1,5 +1,3 @@
-#Android Learning Template
-
 ## 更新日志
 
 ###2016.12.15
@@ -29,16 +27,19 @@ recycler view、LayoutManager、itemTouchHelper实现卡片叠堆，滑动删除
 ###2016.12.31
 preference fragment 实现 settings activity
 
-###2016.1.1
+###2017.1.1
 使用base activity 实现切换app的主题
 
-###2016.1.3
+###2017.1.3
 实现一个introduction页面模板：shape实现indicator dot，view pager&fragment实现slide
 
-###2016.1.4
+###2017.1.4
 实现一个splash模板：countDownTimer实现倒计时indicator
 
-###2016.1.11
+###2017.1.11
 实现一个邮票(礼券)控件:path，path的填充 
 
 //TODO bug：一定要加background才行，海拔属性不协调
+
+###2017.1.31
+更新readme、开源许可等
