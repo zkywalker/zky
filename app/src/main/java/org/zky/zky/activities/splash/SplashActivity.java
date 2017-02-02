@@ -12,10 +12,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import org.zky.zky.MainActivity;
 import org.zky.zky.R;
 import org.zky.zky.activities.introduction.DefaultIntroActivity;
-import org.zky.zky.utils.BaseResponse;
 import org.zky.zky.utils.GetRes;
 import org.zky.zky.utils.SplashImage;
 import org.zky.zky.utils.ZhihuDailyService;
@@ -32,6 +33,10 @@ import retrofit.Retrofit;
 
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
+
+    @BindView(R.id.iv_splash)
+    ImageView ivSplash;
+
     //防止计时器二次跳转
     private boolean flag = true;
 
@@ -74,7 +79,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response<SplashImage> response, Retrofit retrofit) {
                 SplashImage body = response.body();
-                Log.i(TAG, "onResponse: "+response.toString());
+                Picasso.with(SplashActivity.this).load(body.img).into(ivSplash);
             }
 
             @Override
@@ -89,7 +94,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void loadMainActivity() {
-        if (flag){
+        if (flag) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             flag = !flag;
             finish();
