@@ -10,8 +10,8 @@
 
 
 ## 截屏
-![](imag/Screenshot_1486050922.png)
-![](imag/Screenshot_1486050926.png)
+![](img/Screenshot_1486050922.png)
+![](img/Screenshot_1486050926.png)
 ##下载
 [Github](https://github.com/zkywalker/zky/releases)
 ##日志
