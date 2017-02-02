@@ -43,3 +43,6 @@ preference fragment 实现 settings activity
 
 ###2017.1.31
 更新readme、开源许可等
+
+##2017.2.2
+添加retrofit、picasso的使用
