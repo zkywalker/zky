@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         style="@style/CardViewMain"
-        android:onClick="splash"
+        android:onClick="chrome"
         app:cardBackgroundColor="@color/two">
 
         <TextView
@@ -14,9 +14,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:text="@string/splash_activity"
+            android:text="@string/chrome_custom_tabs_activity"
             android:textColor="@color/text"
             android:textSize="18sp" />
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

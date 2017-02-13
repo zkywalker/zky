@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:text="@string/defaultIntroductionActivity"
+            android:text="@string/default_introduction_activity"
             android:textColor="@color/text"
             android:textSize="18sp" />
     </android.support.v7.widget.CardView>

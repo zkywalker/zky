@@ -4,59 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <LinearLayout
-        android:orientation="vertical"
+    <ImageView
+        android:id="@+id/iv_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/five"
-        android:id="@+id/main">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingLeft="32dp"
-            android:layout_weight="3"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="#ffffff"
-            android:paddingRight="32dp"
-            android:textSize="28sp"
-            android:text="splash page title" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="5">
-
-            <ImageView
-                android:id="@+id/iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:src="@drawable/ic_slide1" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:paddingLeft="64dp"
-            android:paddingRight="64dp"
-            android:textSize="16sp"
-            android:text="Your description of application" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="64dp" />
-    </LinearLayout>
+        android:scaleType="fitXY"
+        />
     <FrameLayout
         android:layout_gravity="right"
         android:id="@+id/fl_indicator_container"
