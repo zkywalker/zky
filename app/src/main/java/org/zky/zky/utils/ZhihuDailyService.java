@@ -1,10 +1,9 @@
 package org.zky.zky.utils;
 
-import java.util.List;
 
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Path;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Created by zkywalker on 2017/2/2.
@@ -13,5 +12,8 @@ import retrofit.http.Path;
 
 public interface ZhihuDailyService {
     @GET("start-image/{px}")
-    Call<SplashImage> getUrl(@Path("px") String px);
+    rx.Observable<SplashImage> getUrl(@Path("px") String px);
+
+    @GET("start-image/{px}")
+    Call<SplashImage> getUrl2(@Path("px") String px);
 }

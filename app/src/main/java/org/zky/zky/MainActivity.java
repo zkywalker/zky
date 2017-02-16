@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,16 +15,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.squareup.picasso.Picasso;
+
 import org.zky.zky.activities.ActivitiesActivity;
+import org.zky.zky.activities.splash.SplashActivity;
 import org.zky.zky.utils.GetRes;
+import org.zky.zky.utils.SplashImage;
+import org.zky.zky.utils.ZhihuDailyService;
 import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 import org.zky.zky.widget.WidgetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseThemeActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +57,32 @@ public class MainActivity extends BaseThemeActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://news-at.zhihu.com/api/4/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        ZhihuDailyService service = retrofit.create(ZhihuDailyService.class);
+        Observable<SplashImage> ob = service.getUrl("1080*1776");
+        ob.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SplashImage>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG, "onError: "+e);
+                    }
+
+                    @Override
+                    public void onNext(SplashImage splashImage) {
+                        Log.i(TAG, "onNext: ");
+                    }
+                });
 
     }
 

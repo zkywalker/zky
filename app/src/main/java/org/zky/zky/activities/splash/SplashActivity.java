@@ -25,11 +25,18 @@ import org.zky.zky.widget.Indicator.TimeIndicatorControllerImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
@@ -72,21 +79,30 @@ public class SplashActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://news-at.zhihu.com/api/4/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
+
         ZhihuDailyService service = retrofit.create(ZhihuDailyService.class);
-        Call<SplashImage> c = service.getUrl("1080*1776");
-        c.enqueue(new Callback<SplashImage>() {
-            @Override
-            public void onResponse(Response<SplashImage> response, Retrofit retrofit) {
-                SplashImage body = response.body();
-                Picasso.with(SplashActivity.this).load(body.img).into(ivSplash);
-            }
+        Observable<SplashImage> ob = service.getUrl("1080*1776");
+        ob.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SplashImage>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onFailure(Throwable t) {
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(SplashImage splashImage) {
+                        Log.i(TAG, "onNext: ");
+                        Picasso.with(SplashActivity.this).load(splashImage.img).into(ivSplash);
+                    }
+                });
     }
 
     public void skip(View view) {
