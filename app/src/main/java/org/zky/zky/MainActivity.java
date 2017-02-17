@@ -22,6 +22,7 @@ import org.zky.zky.activities.splash.SplashActivity;
 import org.zky.zky.utils.GetRes;
 import org.zky.zky.utils.SplashImage;
 import org.zky.zky.utils.ZhihuDailyService;
+import org.zky.zky.utils.constants.UrlConstants;
 import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 import org.zky.zky.widget.WidgetActivity;
 
@@ -58,7 +59,7 @@ public class MainActivity extends BaseThemeActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://news-at.zhihu.com/api/4/")
+                .baseUrl(UrlConstants.ZHIHU_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
