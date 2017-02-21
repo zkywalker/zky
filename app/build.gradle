@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "org.zky.zky"
         minSdkVersion 21
@@ -11,10 +11,55 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            keyAlias 'chip'
+            keyPassword 'chipcity2009'
+            storeFile file('/Users/zhangkun/AndroidStudioProjects/xiangting/parkinglock/chipcity.keystore')
+            storePassword 'chipcity2009'
+        }
+    }
+
     buildTypes {
         release {
+            //百度地图api key
+//            manifestPlaceholders = [baidu_map_key : 'Tcu6fmGS242c00x3w6VI71MG']
+
+            signingConfig signingConfigs.release
+
+            //混淆
+            minifyEnabled true
+            //去除无用资源
+            shrinkResources true
+            proguardFile 'proguard-rules.pro'
+            //打包apk后存储路径
+            applicationVariants.all {
+                variant ->
+                    variant.outputs.each {
+                        output ->
+                            def outputFile = output.outputFile
+                            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                                def fileName = "Release_v${defaultConfig.versionName}.apk"
+                                output.outputFile = new File('/Users/zhangkun/Documents/apk', fileName)
+                            }
+
+                    }
+            }
+        }
+
+        debug {
+
+            //修改清单文件里的参数，如百度地图
+//            manifestPlaceholders = [baidu_map_key : 'FF44esGSNqsnyXQt3AE9ICGO']
+
+            //debug包名
+//            applicationIdSuffix ".debug"
+//            versionNameSuffix '-debug'
+
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
         }
     }
 }

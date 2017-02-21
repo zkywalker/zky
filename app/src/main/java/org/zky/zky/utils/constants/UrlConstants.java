@@ -1,7 +1,7 @@
 package org.zky.zky.utils.constants;
 
 /**
- *
+ *参考 阿里java规范，不同的常量分开存
  * Created by zhangkun on 2017/2/17.
  */
 
