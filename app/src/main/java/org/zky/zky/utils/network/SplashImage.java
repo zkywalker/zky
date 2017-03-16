@@ -1,4 +1,4 @@
-package org.zky.zky.utils;
+package org.zky.zky.utils.network;
 
 /**
  * Created by zkywalker on 2017/2/2.

@@ -13,20 +13,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-
-import com.squareup.picasso.Picasso;
 
 import org.zky.zky.activities.ActivitiesActivity;
-import org.zky.zky.activities.splash.SplashActivity;
 import org.zky.zky.utils.GetRes;
-import org.zky.zky.utils.SplashImage;
-import org.zky.zky.utils.ZhihuDailyService;
+import org.zky.zky.utils.network.SplashImage;
+import org.zky.zky.utils.network.ZhihuDailyService;
 import org.zky.zky.utils.constants.UrlConstants;
-import org.zky.zky.widget.Indicator.IndicatorControllerImpl;
 import org.zky.zky.widget.WidgetActivity;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
