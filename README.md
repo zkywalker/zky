@@ -1,20 +1,20 @@
-#Android Learning Template
+# Android Learning Template
 
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com/)
 [![Release](https://img.shields.io/badge/release-0.1.0-blue.svg)](https://github.com/zkywalker/zky/releases)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-##简介
+## 简介
 日常学习归档做的一个android 模板app。包含了Android日常开发中的一些控件、页面、绘制动画等，可以拿来学习参考或直接使用
 
 
 ## 截屏
 ![](img/Screenshot_1486050922.png)
 ![](img/Screenshot_1486050926.png)
-##下载
+## 下载
 [Github](https://github.com/zkywalker/zky/releases)
-##日志
+## 日志
 
 [log](LOG.md)
 
@@ -42,7 +42,7 @@ Linux
 - [AOSP](http://source.android.com/)
 - [okhttp](https://github.com/square/okhttp)
 
-##许可
+## 许可
 ```
 Copyright (C) 2017 zkywalker
 
