@@ -14,12 +14,22 @@
     `Android里的gradle语法、操作，更快速的构建app ()`
     
 # JAVA：
+
 * JAVA核心技术(core java)
 
     `上卷比较基础，下卷个别章节没用(awt)，恶补基础(1/2Vol)`
 
 # Android:
+
 * Android群英传
 * Android开发艺术探索
 * Android设计模式
+* [Android sdk 源码解析](https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis)
 
+# Android面试资料:
+
+* [阿里面试集锦](http://www.jianshu.com/p/cf5092fa2694?utm_source=desktop&utm_medium=timeline)
+
+# 其他
+
+* Automate the Boring Stuff with Python
